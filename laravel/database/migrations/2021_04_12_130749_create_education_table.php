@@ -15,12 +15,16 @@ class CreateEducationTable extends Migration
     {
         Schema::create('education', function (Blueprint $table) {
             $table->id();
-            $table->integer('user_id')->unsigned();
-            $table->integer('qualification')->unsigned();
+            $table->bigInteger('user_id')->unsigned();
+            $table->bigInteger('qualification_id')->unsigned();
             $table->tinyInteger('graduation_rate')->nullable();
             $table->string('instituation_name');
             $table->string('study_field')->nullable();
+            $table->date('start_date')->nullable();
+            $table->date('end_date')->nullable();
             $table->timestamps();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('qualification_id')->references('id')->on('qualifications')->onDelete('cascade');
         });
     }
 
