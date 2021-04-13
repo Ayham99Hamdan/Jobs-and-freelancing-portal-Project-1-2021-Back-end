@@ -21,6 +21,7 @@ class CreateUsersTable extends Migration
             $table->string('phone')->unique();
             $table->text('password');
             $table->text('image');
+            $table->tinyInteger('gender'); // 1 for male 0 for female
             $table->timestamps();
         });
     }
