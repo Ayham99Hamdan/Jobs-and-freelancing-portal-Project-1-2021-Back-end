@@ -15,9 +15,10 @@ use Illuminate\Support\Facades\Route;
 */
 // user api routes
 Route::middleware('locale')->post('user/register', 'UserController@register');
+Route::middleware('locale')->post('user/login', 'UserController@login');
 
-Route::prefix('user')->middleware('auth:user')->group(function () {
-    
+Route::prefix('user')->middleware(['auth:user', 'locale' ])->group(function () {
+    Route::post('logout', 'UserController@logout');
 });
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();

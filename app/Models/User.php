@@ -12,7 +12,7 @@ class User extends Authenticatable
     use Notifiable, HasApiTokens;
 
     protected $fillable = [
-        'name', 'email', 'password',
+        'first_name','last_name', 'email', 'password', 'phone' , 'image' , 'gender'
     ];
     
     public function getGenderAttribute($value){
