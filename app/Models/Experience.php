@@ -9,7 +9,13 @@ class Experience extends Model
     //
     public function user(){
 
-            return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class);
             
+    }
+
+    public function jobRole(){
+
+        $this->hasOne(JobRole::class);
+
     }
 }

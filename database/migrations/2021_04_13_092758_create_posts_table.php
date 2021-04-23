@@ -18,6 +18,7 @@ class CreatePostsTable extends Migration
             $table->bigInteger('company_id')->unsigned();
             $table->bigInteger('job_role_id')->unsigned();
             $table->string('title');
+            $table->string('job_type');
             $table->string('start_salary');
             $table->string('end_salary')->nullable();
             $table->tinyInteger('experience_years');

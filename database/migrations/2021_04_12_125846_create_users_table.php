@@ -21,8 +21,10 @@ class CreateUsersTable extends Migration
             $table->string('phone')->unique()->nullable();
             $table->text('password');
             $table->text('image')->nullable();
+            $table->bigInteger('jop_role_id')->unsigned();
             $table->tinyInteger('gender')->nullable(); // 1 for male 0 for female
             $table->timestamps();
+            $table->foreign('jop_role_id')->references('id')->on('jop_roles')->onDelete('cascade');
         });
     }
 

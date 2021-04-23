@@ -1,28 +1,28 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\auth;
 
-use App\Models\User;
+use App\Models\Company;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Traits\responseTrait;
 use App\Traits\rulesReturnTrait;
-use Ramsey\Uuid\Guid\Fields;
+use App\Http\Controllers\Controller;
 
-class UserController extends Controller
+
+class CompanyController extends Controller
 {
     use responseTrait, rulesReturnTrait;
 
-    protected $model = User::class;
+    protected $model = Company::class;
     
 
     public function register(Request $request)
     {
 
-        $fields = $request->validate($this->userRegisterRules());
+        $fields = $request->validate($this->companyRegisterRules());
 
         $fields['password'] = bcrypt($fields['password']);
-
 
         $user = $this->model::create($fields);
 
@@ -34,7 +34,7 @@ class UserController extends Controller
     public function login(Request $request)
     {
 
-        $fields = $request->validate($this->userLoginRules());
+        $fields = $request->validate($this->companyLoginRules());
 
         $user = $this->model::where('email', $fields['email'])->first();
 
@@ -45,13 +45,13 @@ class UserController extends Controller
 
         $token = $user->createToken('key')->plainTextToken; // shoule to change this or resee it
 
-        return $this->returnData('data', ['user' => $user, 'token' => $token], __('auth.success'));
+        return $this->returnData('data', [$user, $token], __('auth.success'));
     }
 
     public function logout()
     {
 
-        auth('user')->user()->tokens()->delete();
+        auth('company')->user()->tokens()->delete();
 
         return $this->returnSuccess(__('auth.success'));
     }

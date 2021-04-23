@@ -16,8 +16,10 @@ class CreateCompaniesTable extends Migration
         Schema::create('companies', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('avatar');
-            $table->bigInteger('job_role_id')->unsigned();
+            $table->string('email')->unique();
+            $table->text('password');
+            $table->string('avatar')->nullable();
+            $table->bigInteger('job_role_id')->unsigned()->nullable();
             $table->text('description')->nullable();
             $table->timestamps();
             $table->foreign('job_role_id')->references('id')->on('job_roles')->onDelete('cascade');

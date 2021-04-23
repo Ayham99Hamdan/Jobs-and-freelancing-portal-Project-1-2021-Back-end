@@ -49,4 +49,10 @@ class User extends Authenticatable
         return $this->belongsToMany(Post::class, Reaction::class);
 
     }// end of reactions relation
+
+    public function jobRole(){
+
+        return $this->hasOne(JobRole::class);
+
+    }
 }
