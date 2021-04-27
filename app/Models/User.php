@@ -12,29 +12,13 @@ class User extends Authenticatable
     use Notifiable, HasApiTokens;
 
     protected $fillable = [
-        'first_name','last_name', 'email', 'password', 'phone' , 'image' , 'gender'
+        'first_name','last_name', 'email', 'password', 'phone' , 'avatar' , 'gender'
     ];
     
-    public function getGenderAttribute($value){
 
-        if ($value == 1){
-
-            return 'male';
-
-        }else if($value == 0){
-
-            return 'female';
-
-        }else {
-
-            return 'Null';
-
-        }
-
-    }
     public function experiences(){
 
-        return $this->hasMany(Experience::class);
+        return $this->hasMany(Experience::class , 'user_id');
 
     }// end of experiences relation
 
@@ -55,4 +39,41 @@ class User extends Authenticatable
         return $this->hasOne(JobRole::class);
 
     }
+
+    public function getGenderAttribute($value){
+
+        if ($value == 1){
+
+            return 'male';
+
+        }else if($value == 0){
+
+            return 'female';
+
+        }else {
+
+            return 'Null';
+
+        }
+
+    }// end of get gender
+    public function setGenderAttribute($value){
+
+        if($value === "male"){
+
+            $this->attributes['gender'] = 1;
+
+        } else{
+
+            $this->attributes['gender'] = 0;
+
+        }
+
+    } // end of set gender
+
+    public function getAvatarAttribute($value){
+
+        return asset('uploads/user_images/' . $value);
+
+    }// end of get path of user's avatar
 }

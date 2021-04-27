@@ -13,27 +13,43 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-// user api routes
-Route::middleware('locale')->post('user/register', 'UserController@register');
-Route::middleware('locale')->post('user/login', 'UserController@login');
 
-Route::prefix('user')->middleware(['auth:user', 'locale' ])->group(function () {
-    Route::post('logout', 'UserController@logout');
+Route::namespace('auth')->group(function () {
+
+
+    // start companies api routes 
+
+    Route::post('company/register', 'CompanyController@register');
+    Route::post('company/login', 'CompanyController@login');
+
+    Route::prefix('company')->middleware(['auth:company', 'locale'])->group(function () {
+        Route::post('logout', 'CompanyController@logout');
+    });
+
+    // end companies api routes
+
+    // Start user api routes
+
+    Route::post('user/register', 'UserController@register');
+    Route::post('user/login', 'UserController@login');
+
+    Route::prefix('user')->middleware('auth:user')->group(function () {
+       // Route::namespace('User')->get('addEducation' , 'UserProfileController@addEducation');
+        Route::post('logout', 'UserController@logout');
+    });
+
+    // end user api routes
+
+
 });
 
-// end user api routes
-
-
-// start companies api routes 
-
-Route::middleware('locale')->post('company/register', 'auth\CompanyController@register');
-Route::middleware('locale')->post('company/login', 'auth\CompanyController@login');
-
-Route::prefix('company')->middleware(['auth:company', 'locale' ])->group(function () {
-    Route::post('logout', 'auth\CompanyController@logout');
-});
-
-// end companies api routes
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::namespace('User')->prefix('user')->middleware('auth:user')->group(function () {
+    // User Profile Update Route
+    Route::post('updateUser', 'UserProfileController@updateUser');
+    // Education Routes
+    Route::post('addEducation' , 'UserProfileController@addEducation');
+    Route::post('updateEducation' , 'UserProfileController@updateEducation');
+    // Experience Routes
+    Route::post('addExperience' , 'UserProfileController@addExperience');
+    Route::post('updateExperience' , 'UserProfileController@updateExperience');
 });

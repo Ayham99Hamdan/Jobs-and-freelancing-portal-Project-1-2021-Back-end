@@ -19,7 +19,7 @@ class CreateExperiencesTable extends Migration
             $table->string('job_title');
             $table->string('company_name');
             $table->bigInteger('job_role_id')->unsigned();
-            $table->date('start_date');
+            $table->date('start_date')->nullable();
             $table->date('end_date')->nullable();
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

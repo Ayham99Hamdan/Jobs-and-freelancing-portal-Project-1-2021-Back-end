@@ -16,7 +16,8 @@ trait rulesReturnTrait
             'first_name' => 'required|string|max:50',
             'last_name' => 'string|max:50',
             'email' => 'required|string|unique:users,email',
-            'password' => 'required|string|confirmed'
+            'password' => 'required|string|confirmed',
+            'avatar' => 'image',
 
         ];
     }

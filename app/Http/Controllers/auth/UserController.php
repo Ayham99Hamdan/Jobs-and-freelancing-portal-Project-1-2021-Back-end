@@ -1,13 +1,16 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\auth;
 
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Traits\responseTrait;
 use App\Traits\rulesReturnTrait;
-use Ramsey\Uuid\Guid\Fields;
+use App\Http\Controllers\Controller;
+use Intervention\Image\Facades\Image;
+
+
 
 class UserController extends Controller
 {
@@ -23,7 +26,15 @@ class UserController extends Controller
 
         $fields['password'] = bcrypt($fields['password']);
 
+        if($fields['avatar']){
+            
+            Image::make($fields['avatar'])->resize(300, 300, function ($constraint) {
+                $constraint->aspectRatio();
+            })->save(public_path('uploads/user_images/') . $fields['avatar']->hashName());
 
+            $fields['avatar'] = $fields['avatar']->hashName();
+            
+        }
         $user = $this->model::create($fields);
 
         $token = $user->createToken('key')->plainTextToken; // shoule to change this or resee it
@@ -55,4 +66,6 @@ class UserController extends Controller
 
         return $this->returnSuccess(__('auth.success'));
     }
+
+    
 }
