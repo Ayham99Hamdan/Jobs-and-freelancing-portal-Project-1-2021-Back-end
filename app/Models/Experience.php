@@ -11,7 +11,9 @@ class Experience extends Model
         'user_id',
         'job_title',
         'company_name',
-        'job_role_id'
+        'job_role_id',
+        'start_date',
+        'end_date'
     ];
 
 

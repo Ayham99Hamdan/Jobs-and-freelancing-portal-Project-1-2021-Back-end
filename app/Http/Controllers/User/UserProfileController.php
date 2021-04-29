@@ -26,6 +26,8 @@ class UserProfileController extends Controller
             'qualification_id' => 'required',
             'instituation_name' => 'required|string',
             'study_field' => 'required|string',
+            'start_date' => 'required|date',
+            'end_date' => 'date'
 
 
         ]);
@@ -38,6 +40,8 @@ class UserProfileController extends Controller
             'qualification_id' => $fields['qualification_id'],
             'instituation_name' => $fields['instituation_name'],
             'study_field' => $fields['instituation_name'],
+            'start_date'   => $fields['start_date'],
+            'end_date'   => $fields['end_date'],
 
         ]);
     }// end of addEducation method 
@@ -51,6 +55,8 @@ class UserProfileController extends Controller
             'qualification_id' => 'required',
             'instituation_name' => 'required|string',
             'study_field' => 'required|string',
+            'start_date' => 'required|date',
+            'end_date' => 'date'
         ]);
         
         return User::find($user_id)->educations()->where('id' , $fields['id'])->update([
@@ -58,6 +64,8 @@ class UserProfileController extends Controller
             'qualification_id' => $fields['qualification_id'],
             'instituation_name' => $fields['instituation_name'],
             'study_field' => $fields['instituation_name'],
+            'start_date'   => $fields['start_date'],
+            'end_date'   => $fields['end_date'],
 
         ]);
 
@@ -73,7 +81,8 @@ class UserProfileController extends Controller
             'job_title' => 'required|string',
             'company_name' => 'required',
             'job_role_id' => 'required',
-            //'start_date' => 'required|date'
+            'start_date' => 'required|date',
+            'end_date' => 'date'
 
         ]);
 
@@ -85,7 +94,8 @@ class UserProfileController extends Controller
             'job_title' => $fields['job_title'],
             'company_name' => $fields['company_name'],
             'job_role_id' => $fields['job_role_id'],
-            //'start_date'   => strtotime($fields['start_date'])
+            'start_date'   => $fields['start_date'],
+            'end_date'   => $fields['end_date'],
 
         ]);
     }//end of addExperience
@@ -100,7 +110,7 @@ class UserProfileController extends Controller
             'company_name' => 'required',
             'job_role_id' => 'required',
             'start_date' => 'required|date',
-            'end_date' => 'required|date'
+            'end_date' => 'date'
         ]);
 
         $experience = User::find($user_id)->experiences()->where('id', $fields['id'])->update([
@@ -126,6 +136,8 @@ class UserProfileController extends Controller
         $rules = $this->userRegisterRules();
 
         $fields = $request->validate($rules);
+
+        return $fields;
 
     }
 }
