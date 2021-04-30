@@ -23,6 +23,7 @@ class CreateCompaniesTable extends Migration
             $table->text('description')->nullable();
             $table->timestamps();
             $table->foreign('job_role_id')->references('id')->on('job_roles')->onDelete('cascade');
+
         });
     }
 
