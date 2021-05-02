@@ -56,3 +56,13 @@ Route::namespace('User')->prefix('user')->middleware(['auth:user' , 'locale'])->
     Route::get('userProfile' , 'getUserProfileController@getUserProfile');
     
 });
+
+
+Route::get('posts','PostController@index');
+
+Route::get('posts/{id}','PostController@show');
+
+
+Route::get('reactions','ReactionController@index');
+
+Route::get('reactions/{id}' ,'ReactionController@show');
