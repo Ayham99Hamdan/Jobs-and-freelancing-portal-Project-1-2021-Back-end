@@ -2,11 +2,15 @@
 
 namespace App\Exceptions;
 
+use ErrorException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
+use App\Traits\responseTrait;
 
 class Handler extends ExceptionHandler
 {
+
+    use responseTrait;
     /**
      * A list of the exception types that are not reported.
      *
@@ -50,6 +54,11 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Throwable $exception)
     {
+        if($exception instanceof ErrorException){
+
+            return $this->returnError(202 , 'Unkown Error');
+
+        }
         return parent::render($request, $exception);
     }
 }

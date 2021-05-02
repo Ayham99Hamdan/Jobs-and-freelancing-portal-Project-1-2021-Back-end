@@ -43,13 +43,16 @@ Route::namespace('auth')->group(function () {
 
 });
 
-Route::namespace('User')->prefix('user')->middleware('auth:user')->group(function () {
+Route::namespace('User')->prefix('user')->middleware(['auth:user' , 'locale'])->group(function () {
     // User Profile Update Route
-    Route::post('updateUser', 'UserProfileController@updateUser');
+    Route::post('updateUser', 'UserProfileController@updateUserProfile');
     // Education Routes
     Route::post('addEducation' , 'UserProfileController@addEducation');
     Route::post('updateEducation' , 'UserProfileController@updateEducation');
     // Experience Routes
     Route::post('addExperience' , 'UserProfileController@addExperience');
     Route::post('updateExperience' , 'UserProfileController@updateExperience');
+    // get user informations Routes
+    Route::get('userProfile' , 'getUserProfileController@getUserProfile');
+    
 });

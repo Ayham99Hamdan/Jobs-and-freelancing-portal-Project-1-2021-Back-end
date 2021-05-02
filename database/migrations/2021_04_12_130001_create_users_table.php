@@ -20,7 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->string('phone')->unique()->nullable();
             $table->text('password');
-            $table->text('avatar')->nullable();
+            $table->text('avatar')->default('default.jpg');
             $table->bigInteger('job_role_id')->unsigned()->nullable();
             $table->tinyInteger('gender')->nullable(); // 1 for male 0 for female
             $table->timestamps();

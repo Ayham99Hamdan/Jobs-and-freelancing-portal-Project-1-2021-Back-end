@@ -14,7 +14,7 @@ class User extends Authenticatable
     protected $fillable = [
         'first_name','last_name', 'email', 'password', 'phone' , 'avatar' , 'gender'
     ];
-    
+    protected $appends = ['avatar_url'];
 
     public function experiences(){
 
@@ -71,9 +71,9 @@ class User extends Authenticatable
 
     } // end of set gender
 
-    public function getAvatarAttribute($value){
+    public function getAvatarUrlAttribute(){
 
-        return asset('uploads/user_images/' . $value);
+        return asset('uploads/user_images/' . $this->avatar);
 
     }// end of get path of user's avatar
 }

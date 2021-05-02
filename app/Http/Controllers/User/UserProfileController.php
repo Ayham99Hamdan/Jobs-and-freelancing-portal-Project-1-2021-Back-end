@@ -9,7 +9,8 @@ use App\Models\Education;
 use App\Models\Experience;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Carbon\Carbon;
+use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\Storage;
 
 class UserProfileController extends Controller
 {
@@ -27,7 +28,7 @@ class UserProfileController extends Controller
             'instituation_name' => 'required|string',
             'study_field' => 'required|string',
             'start_date' => 'required|date',
-            'end_date' => 'date'
+            'end_date' => 'nullable|date'
 
 
         ]);
@@ -41,8 +42,7 @@ class UserProfileController extends Controller
             'instituation_name' => $fields['instituation_name'],
             'study_field' => $fields['instituation_name'],
             'start_date'   => $fields['start_date'],
-            'end_date'   => $fields['end_date'],
-
+            'end_date'   => $fields['end_date'],    
         ]);
     }// end of addEducation method 
 
@@ -56,7 +56,7 @@ class UserProfileController extends Controller
             'instituation_name' => 'required|string',
             'study_field' => 'required|string',
             'start_date' => 'required|date',
-            'end_date' => 'date'
+            'end_date' => 'nullable|date'
         ]);
         
         return User::find($user_id)->educations()->where('id' , $fields['id'])->update([
@@ -82,7 +82,7 @@ class UserProfileController extends Controller
             'company_name' => 'required',
             'job_role_id' => 'required',
             'start_date' => 'required|date',
-            'end_date' => 'date'
+            'end_date' => 'nullable|date'
 
         ]);
 
@@ -95,7 +95,6 @@ class UserProfileController extends Controller
             'company_name' => $fields['company_name'],
             'job_role_id' => $fields['job_role_id'],
             'start_date'   => $fields['start_date'],
-            'end_date'   => $fields['end_date'],
 
         ]);
     }//end of addExperience
@@ -110,7 +109,7 @@ class UserProfileController extends Controller
             'company_name' => 'required',
             'job_role_id' => 'required',
             'start_date' => 'required|date',
-            'end_date' => 'date'
+            'end_date' => 'nullable|date'
         ]);
 
         $experience = User::find($user_id)->experiences()->where('id', $fields['id'])->update([
@@ -134,10 +133,31 @@ class UserProfileController extends Controller
 
         $user = auth('user')->user();
         $rules = $this->userRegisterRules();
+        unset($rules['email']);
+        unset($rules['password']);
 
         $fields = $request->validate($rules);
+        
+        if ($fields['avatar']) {
 
-        return $fields;
+            if($fields['avatar'] != 'default.jpg'){
+                
+                
+                Storage::disk('public_uploads')->delete('/user_images' .'/'. $user->avatar);
+                
+            }
 
-    }
+            Image::make($request->avatar)->resize(300, 300, function ($constraint) {
+                $constraint->aspectRatio();
+            })->save(public_path('uploads/user_images/') . $fields['avatar']->hashName());
+
+            $fields['avatar'] = $fields['avatar']->hashName();
+        }
+        
+        User::find($user->id)->update($fields);
+        $user = User::find($user->id);
+        return $user;
+
+
+    }// end of update main user data
 }

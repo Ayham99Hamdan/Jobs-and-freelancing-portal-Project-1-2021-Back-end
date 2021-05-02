@@ -25,7 +25,7 @@ class Experience extends Model
 
     public function jobRole(){
 
-        $this->hasOne(JobRole::class);
+        return $this->belongsTo(JobRole::class);
 
     }
 }
