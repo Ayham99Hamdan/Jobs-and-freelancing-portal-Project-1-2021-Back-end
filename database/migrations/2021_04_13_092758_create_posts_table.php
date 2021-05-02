@@ -26,6 +26,7 @@ class CreatePostsTable extends Migration
             $table->foreign('company_id')->references('id')->on('companies')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('job_role_id')->references('id')->on('job_roles')->onDelete('cascade');
             $table->timestamps();
+
         });
     }
 

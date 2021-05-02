@@ -16,7 +16,9 @@ class CreateJobRolesTable extends Migration
         Schema::create('job_roles', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            
+            $table->dateTime('updated_at');
+            $table->dateTime('created_at');
+
         });
     }
 
