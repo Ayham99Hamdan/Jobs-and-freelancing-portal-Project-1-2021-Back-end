@@ -12,7 +12,8 @@ $factory->define(Experience::class, function (Faker $faker) {
         'job_title' => $faker->title,
         'company_name' => $faker->name,
         'job_role_id' => $faker->numberBetween(1,10),
-        'start_date'  => $faker->dateTime,
+        'start_date' => $faker->date('Y-m-d'),
+        'end_date' => $faker->date('Y-m-d'),
         //TODO cc
     ];
 });

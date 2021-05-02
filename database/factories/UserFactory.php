@@ -22,10 +22,10 @@ $factory->define(User::class, function (Faker $faker) {
         'first_name' => $faker->firstName,
         'last_name' => $faker->lastName,
         'email' =>$faker->unique()->safeEmail,
-        'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+        'password' => bcrypt('123456'), // password
         'phone' => $faker->phoneNumber,
-        'avatar' => $faker->imageUrl(),
+        'avatar' => 'default.jpg',
         'job_role_id' => $faker->numberBetween(1,10),
-        'gender' =>$faker->numberBetween(1,2),
+        'gender' =>$faker->numberBetween(0,1),
     ];
 });

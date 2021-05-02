@@ -12,6 +12,9 @@ $factory->define(Education::class, function (Faker $faker) {
         'qualification_id' => $faker->numberBetween(1,20),
         'graduation_rate' => $faker->numberBetween(0,5),
         'instituation_name' => $faker->name,
+        'study_field' => $faker->name(),
+        'start_date' => $faker->date('Y-m-d'),
+        'end_date' => $faker->date('Y-m-d'),
         //TODO
 
     ];
