@@ -25,6 +25,7 @@ class CreateUsersTable extends Migration
             $table->tinyInteger('gender')->nullable(); // 1 for male 0 for female
             $table->timestamps();
             $table->foreign('job_role_id')->references('id')->on('job_roles')->onDelete('cascade');
+
         });
     }
 
