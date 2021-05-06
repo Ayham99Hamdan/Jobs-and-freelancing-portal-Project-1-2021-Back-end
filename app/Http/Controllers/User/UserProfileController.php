@@ -35,7 +35,7 @@ class UserProfileController extends Controller
 
 
 
-        return $education = Education::create([
+        $education = Education::create([
 
             'user_id' => $user->id,
             'qualification_id' => $fields['qualification_id'],
@@ -44,6 +44,8 @@ class UserProfileController extends Controller
             'start_date'   => $fields['start_date'],
             'end_date'   => $fields['end_date'],    
         ]);
+
+        return $this->returnSuccess(__('auth.success'));
     }// end of addEducation method 
 
     public function updateEducation(Request $request){
@@ -59,7 +61,7 @@ class UserProfileController extends Controller
             'end_date' => 'nullable|date'
         ]);
         
-        return User::find($user_id)->educations()->where('id' , $fields['id'])->update([
+        User::find($user_id)->educations()->where('id' , $fields['id'])->update([
 
             'qualification_id' => $fields['qualification_id'],
             'instituation_name' => $fields['instituation_name'],
@@ -68,7 +70,7 @@ class UserProfileController extends Controller
             'end_date'   => $fields['end_date'],
 
         ]);
-
+        return $this->returnSuccess(__('auth.success'));
     }// end of updateEducation
 
     public function addExperience(Request $request)
@@ -97,6 +99,8 @@ class UserProfileController extends Controller
             'start_date'   => $fields['start_date'],
 
         ]);
+
+        return $this->returnSuccess(__('auth.success'));
     }//end of addExperience
 
     public function updateExperience(Request $request){
@@ -121,11 +125,7 @@ class UserProfileController extends Controller
             'end_date'   => $fields['end_date'],
         ]);       
         
-        if($experience){    
-
-            return $this->returnData('date', User::find($user_id)->experiences()->get(), 'thos');
-
-        }
+        return $this->returnSuccess(__('auth.success'));
 
     }//update user profile
 
@@ -155,9 +155,6 @@ class UserProfileController extends Controller
         }
         
         User::find($user->id)->update($fields);
-        $user = User::find($user->id);
-        return $user;
-
-
+        return $this->returnSuccess(__('auth.success'));
     }// end of update main user data
 }

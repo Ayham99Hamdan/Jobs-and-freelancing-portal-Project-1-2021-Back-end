@@ -8,8 +8,8 @@ use Faker\Generator as Faker;
 $factory->define(\App\Models\Company::class, function (Faker $faker) {
     return [
         'name' => $faker->name,
-        'email' => $faker->email,
-        'password' => $faker->password,
+        'email' => $faker->unique()->safeEmail,
+        'password' => bcrypt('123456'),
         'avatar' => $faker->imageUrl(),
         'job_role_id' => $faker->numberBetween(1,10),
         'description' => $faker->text,

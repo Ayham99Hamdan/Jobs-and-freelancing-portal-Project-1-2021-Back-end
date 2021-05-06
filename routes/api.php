@@ -54,5 +54,19 @@ Route::namespace('User')->prefix('user')->middleware(['auth:user' , 'locale'])->
     Route::post('updateExperience' , 'UserProfileController@updateExperience');
     // get user informations Routes
     Route::get('userProfile' , 'getUserProfileController@getUserProfile');
-    
+
+    // get and control matched posts
+    Route::get('getPosts' , 'UserPostsController@getMatchedPosts');
+
+});
+
+
+Route::namespace('Company')->prefix('company')->middleware(['auth:company' , 'locale'])->group(function () {
+
+    Route::post('createPost', 'CompanyManageController@createPost');
+    Route::post('deletePost', 'CompanyManageController@deletePost');
+    Route::post('updatePost' , 'CompanyManageController@updatePost');
+    Route::get('getPosts' , 'CompanyManageController@getAllPosts');
+
+
 });

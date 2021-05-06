@@ -28,7 +28,7 @@ class CompanyController extends Controller
 
         $token = $user->createToken('key')->plainTextToken; // shoule to change this or resee it
 
-        return $this->returnData('data', [$user, $token], __('auth.success'));
+        return $this->returnData('data', ['user' => $user, 'token' => $token], __('auth.success'));
     }
 
     public function login(Request $request)
@@ -37,7 +37,7 @@ class CompanyController extends Controller
         $fields = $request->validate($this->companyLoginRules());
 
         $user = $this->model::where('email', $fields['email'])->first();
-
+        
         if (!$user || !Hash::check($fields['password'], $user->password)) {
 
             return $this->returnError(201, __('auth.password_error'));
@@ -45,7 +45,7 @@ class CompanyController extends Controller
 
         $token = $user->createToken('key')->plainTextToken; // shoule to change this or resee it
 
-        return $this->returnData('data', [$user, $token], __('auth.success'));
+        return $this->returnData('data', ['user' => $user, 'token' => $token], __('auth.success'));
     }
 
     public function logout()

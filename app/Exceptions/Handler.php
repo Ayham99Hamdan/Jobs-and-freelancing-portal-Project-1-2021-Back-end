@@ -6,6 +6,7 @@ use ErrorException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
 use App\Traits\responseTrait;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class Handler extends ExceptionHandler
 {
@@ -57,6 +58,11 @@ class Handler extends ExceptionHandler
         if($exception instanceof ErrorException){
 
             return $this->returnError(202 , 'Unkown Error');
+
+        }
+        if($exception instanceof NotFoundHttpException){
+
+            return $this->returnError(404 , 'Not Found');
 
         }
         return parent::render($request, $exception);
