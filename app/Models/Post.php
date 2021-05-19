@@ -15,15 +15,38 @@ class Post extends Model
     'start_salary',
     'experience_years',
     'description'];
-    public function usersReations(){
+    public function userReaction(){
 
-        return $this->belongsToMany(user::class, Reaction::class);
+        return $this->belongsToMany(user::class, 'reactions');
 
-    }// end of usersReations that return who user is reacting post
+    }// end of usersReactions that return who user is reacting post
 
     public function company(){
 
         return $this->belongsTo(Company::class);
+
+    }
+    public function jobRoles(){
+
+        return $this->belongsTo(JobRole::class , 'job_role_id');
+
+    }
+
+    public function schedules(){
+
+        return $this->hasMany( Schedule::class, 'post_id' , 'id');
+
+    }
+
+    public function approvedUser(){
+
+        return $this->belongsToMany(User::class ,'approved_users');
+
+    }
+
+    public function tags(){
+
+        return $this->hasMany(PostTag::class , 'post_id');
 
     }
 }

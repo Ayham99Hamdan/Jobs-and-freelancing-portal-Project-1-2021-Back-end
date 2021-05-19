@@ -7,7 +7,7 @@ use PhpParser\Builder\Trait_;
 trait rulesReturnTrait
 {
 
-    // Start user Form Rules 
+    // Start user Form Rules
     public function userRegisterRules()
     {
 
@@ -18,6 +18,7 @@ trait rulesReturnTrait
             'email' => 'required|string|unique:users,email',
             'password' => 'required|string|confirmed',
             'avatar' => 'image',
+            'tags.*' => 'string'
 
         ];
     }

@@ -2,50 +2,52 @@
 
 namespace App\Http\Controllers\auth;
 
+use App\Http\Controllers\apiController;
 use App\Models\Company;
+use App\Traits\RestfulTrait;
+use Illuminate\Http\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use App\Traits\responseTrait;
 use App\Traits\rulesReturnTrait;
-use App\Http\Controllers\Controller;
 
 
-class CompanyController extends Controller
+class CompanyController extends apiController
 {
-    use responseTrait, rulesReturnTrait;
+    use RestfulTrait, rulesReturnTrait;
 
     protected $model = Company::class;
-    
+
 
     public function register(Request $request)
     {
+        $validate = $this->apiValidation($request , $this->companyRegisterRules());
 
-        $fields = $request->validate($this->companyRegisterRules());
+        if($validate instanceof Response) return $validate;
 
-        $fields['password'] = bcrypt($fields['password']);
+        $request['password'] = bcrypt($request->password);
 
-        $user = $this->model::create($fields);
+        $user = $this->model::create($request->all());
 
         $token = $user->createToken('key')->plainTextToken; // shoule to change this or resee it
-
-        return $this->returnData('data', ['user' => $user, 'token' => $token], __('auth.success'));
+        return $this->apiResponse(['user' => $user , 'token' => $token], self::STATUS_CREATED, 'Company Account has been registerd successfully');
     }
 
     public function login(Request $request)
     {
 
-        $fields = $request->validate($this->companyLoginRules());
+        $validate = $this->apiValidation($request , $this->companyLoginRules());
+        if($validate instanceof Response) return $validate;
 
-        $user = $this->model::where('email', $fields['email'])->first();
-        
-        if (!$user || !Hash::check($fields['password'], $user->password)) {
+        $user = $this->model::where('email', $request->email)->first();
 
-            return $this->returnError(201, __('auth.password_error'));
+        if (!$user || !Hash::check($request->password, $user->password)) {
+
+            return $this->apiResponse([], self::STATUS_NOT_AUTHENTICATED, __('auth.password_error'));
         }
 
         $token = $user->createToken('key')->plainTextToken; // shoule to change this or resee it
 
-        return $this->returnData('data', ['user' => $user, 'token' => $token], __('auth.success'));
+        return $this->apiResponse(['user' => $user, 'token' => $token], self::STATUS_OK,__('auth.success'));
     }
 
     public function logout()
@@ -53,6 +55,6 @@ class CompanyController extends Controller
 
         auth('company')->user()->tokens()->delete();
 
-        return $this->returnSuccess(__('auth.success'));
+        return $this->apiResponse([], self::STATUS_OK, __('auth.success'));
     }
 }

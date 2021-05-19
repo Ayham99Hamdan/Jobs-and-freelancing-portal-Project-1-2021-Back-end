@@ -2,20 +2,22 @@
 
 namespace App\Http\Controllers\auth;
 
+use App\Http\Controllers\apiController;
+use App\Http\Resources\UserResource;
 use App\Models\User;
+use App\Models\UserTag;
+use App\Traits\RestfulTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use App\Traits\responseTrait;
 use App\Traits\rulesReturnTrait;
 use App\Http\Controllers\Controller;
-use Exception;
 use Intervention\Image\Facades\Image;
 
 
 
-class UserController extends Controller
+class UserController extends apiController
 {
-    use responseTrait, rulesReturnTrait;
+    use RestfulTrait, rulesReturnTrait;
 
     protected $model = User::class;
 
@@ -23,7 +25,8 @@ class UserController extends Controller
     public function register(Request $request)
     {
 
-        $request->validate($this->userRegisterRules());
+        $validate = $this->apiValidation($request, $this->userRegisterRules());
+        if($validate instanceof Response) return $validate;
         $request_data = $request->except('password', 'password_confirmation', 'avatar');
         $request_data['password'] = bcrypt($request->password);
 
@@ -37,25 +40,31 @@ class UserController extends Controller
         }
         $user = $this->model::create($request_data);
         $token = $user->createToken('key')->plainTextToken; // shoule to change this or resee it
-
-        return $this->returnData('data', ['user' => $user, 'token' =>  $token], __('auth.success'));
+        if(count($request->tags) != 0)
+            foreach ($request->tags as $tag){
+                UserTag::create([
+                    'user_id' => $user->id,
+                    'tag' => $tag
+                ]);
+        }
+        return $this->apiResponse(['user' => new UserResource($user), 'token' =>  $token], self::STATUS_CREATED,__('auth.success'));
     }
 
     public function login(Request $request)
     {
+        $validate = $this->apiValidation($request, $this->userLoginRules());
+        if($validate instanceof Response) return $validate;
 
-        $fields = $request->validate($this->userLoginRules());
+        $user = $this->model::where('email', $request->email)->first();
 
-        $user = $this->model::where('email', $fields['email'])->first();
+        if (!$user || !Hash::check($request->password, $user->password)) {
 
-        if (!$user || !Hash::check($fields['password'], $user->password)) {
-
-            return $this->returnError(201, __('auth.password_error'));
+            return $this->apiResponse([], self::STATUS_NOT_AUTHENTICATED, __('auth.password_error'));
         }
 
         $token = $user->createToken('key')->plainTextToken; // shoule to change this or resee it
 
-        return $this->returnData('data', ['user' => $user, 'token' => $token], __('auth.success'));
+        return $this->apiResponse(['user' => $user, 'token' => $token], self::STATUS_OK,__('auth.success'));
     }
 
     public function logout()
@@ -63,6 +72,6 @@ class UserController extends Controller
 
         auth('user')->user()->tokens()->delete();
 
-        return $this->returnSuccess(__('auth.success'));
+        return $this->apiResponse([], self::STATUS_OK,__('auth.success'));
     }
 }

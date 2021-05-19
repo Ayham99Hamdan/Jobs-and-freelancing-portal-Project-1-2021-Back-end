@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Validation\Rules\In;
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
@@ -30,13 +31,31 @@ class User extends Authenticatable
 
     public function reactions(){
 
-        return $this->belongsToMany(Post::class, Reaction::class);
+        return $this->belongsToMany(Post::class, 'reactions');
 
     }// end of reactions relation
 
     public function jobRole(){
 
         return $this->hasOne(JobRole::class);
+
+    }
+
+    public function approvedPost(){
+
+        return $this->belongsToMany(Post::class, 'approved_users');
+
+    }
+
+    public function interviews(){
+
+        return $this->hasMany(Interview::class,'user_id');
+
+    }
+
+    public function tags(){
+
+        return $this->hasMany(UserTag::class , 'user_id');
 
     }
 

@@ -17,10 +17,11 @@ class UserResource extends JsonResource
         return [
 
             'id' => $this->id,
-            'name' => $this->first_name,
+            'name' => $this->first_name . " " . $this->last_name,
             'email' => $this->email,
-            'educations' => EducationResource::collection($this->educations),
-            'experiences' => ExperienceResource::collection($this->experiences)
+            'avatar' => $this->avatar,
+            'educations' => EducationResource::collection($this->whenLoaded('educations')),
+            'experiences' => ExperienceResource::collection($this->whenLoaded('experiences'))
 
         ];
     }

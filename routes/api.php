@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Company\CompanyManageController;
+use App\Http\Controllers\Company\Post\ScheduleController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,10 +16,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::namespace('auth')->group(function () {
+Route::middleware('locale')->namespace('auth')->group(function () {
 
 
-    // start companies api routes 
+    // start companies api routes
 
     Route::post('company/register', 'CompanyController@register');
     Route::post('company/login', 'CompanyController@login');
@@ -48,25 +50,32 @@ Route::namespace('User')->prefix('user')->middleware(['auth:user' , 'locale'])->
     Route::post('updateUser', 'UserProfileController@updateUserProfile');
     // Education Routes
     Route::post('addEducation' , 'UserProfileController@addEducation');
-    Route::post('updateEducation' , 'UserProfileController@updateEducation');
+    Route::post('updateEducation/{id}' , 'UserProfileController@updateEducation');
     // Experience Routes
     Route::post('addExperience' , 'UserProfileController@addExperience');
-    Route::post('updateExperience' , 'UserProfileController@updateExperience');
+    Route::post('updateExperience/{id}' , 'UserProfileController@updateExperience');
     // get user informations Routes
     Route::get('userProfile' , 'getUserProfileController@getUserProfile');
 
     // get and control matched posts
-    Route::get('getPosts' , 'UserPostsController@getMatchedPosts');
+    //Route::get('getPosts' , 'UserPostsController@getMatchedPosts');
+    Route::get('getPosts' , 'UserPostsController@getPostByTag');
+    // Reaction with this posts
+    Route::get('reaction/{id}' , 'UserPostsController@reaction');
+    //Schedule and Interview
+    Route::post('schedule' , 'UserPostsController@viewSchedule');
+    Route::post('interview-select' , 'UserPostsController@selectInterviewTime');
+    Route::post('interview-deselect' , 'UserPostsController@deselectInterviewTime');
 
 });
 
 
 Route::namespace('Company')->prefix('company')->middleware(['auth:company' , 'locale'])->group(function () {
+    Route::apiResource('post', 'CompanyManageController');
+    Route::apiResource('schedule' , \Post\ScheduleController::class);
+    Route::post('approve' , [CompanyManageController::class, 'approve']);
+    Route::get('schedule/index/{post_id}' , [\App\Http\Controllers\Company\Post\ScheduleController::class , 'index']);
 
-    Route::post('createPost', 'CompanyManageController@createPost');
-    Route::post('deletePost', 'CompanyManageController@deletePost');
-    Route::post('updatePost' , 'CompanyManageController@updatePost');
-    Route::get('getPosts' , 'CompanyManageController@getAllPosts');
 
 
 });

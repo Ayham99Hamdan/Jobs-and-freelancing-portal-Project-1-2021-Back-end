@@ -2,16 +2,17 @@
 
 namespace App\Exceptions;
 
+use App\Traits\RestfulTrait;
 use ErrorException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
-use App\Traits\responseTrait;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use App\Http\Controllers\apiController;
 
 class Handler extends ExceptionHandler
 {
 
-    use responseTrait;
+    use RestfulTrait;
     /**
      * A list of the exception types that are not reported.
      *
@@ -55,15 +56,9 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Throwable $exception)
     {
-        if($exception instanceof ErrorException){
-
-            return $this->returnError(202 , 'Unkown Error');
-
-        }
         if($exception instanceof NotFoundHttpException){
 
-            return $this->returnError(404 , 'Not Found');
-
+            return $this->apiResponse([],apiController::STATUS_NOT_FOUND, 'There are no data');
         }
         return parent::render($request, $exception);
     }
