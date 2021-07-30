@@ -15,6 +15,11 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+// static data route
+Route::middleware('locale')->resource('job-role' , 'JobRoleController')->only('index');
+Route::middleware('locale')->resource('qualification' , 'QualificationController')->only('index');
+
+
 
 Route::middleware('locale')->namespace('auth')->group(function () {
 
@@ -75,7 +80,4 @@ Route::namespace('Company')->prefix('company')->middleware(['auth:company' , 'lo
     Route::apiResource('schedule' , \Post\ScheduleController::class);
     Route::post('approve' , [CompanyManageController::class, 'approve']);
     Route::get('schedule/index/{post_id}' , [\App\Http\Controllers\Company\Post\ScheduleController::class , 'index']);
-
-
-
 });

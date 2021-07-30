@@ -15,7 +15,6 @@ class CreateQualificationsTable extends Migration
     {
         Schema::create('qualifications', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
             $table->dateTime('updated_at');
             $table->dateTime('created_at');
 

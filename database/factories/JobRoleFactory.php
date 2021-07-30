@@ -8,6 +8,7 @@ use Faker\Generator as Faker;
 
 $factory->define(JobRole::class, function (Faker $faker) {
     return [
-        'name' => $faker->name,
+        'name:en' => $faker->name,
+        'name:ar'=> 'الحمدلله',
     ];
 });

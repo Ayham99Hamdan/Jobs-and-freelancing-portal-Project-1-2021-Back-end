@@ -3,18 +3,17 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\apiController;
-use App\Http\Controllers\Controller;
 use App\Http\Resources\EducationResource;
 use App\Http\Resources\ExperienceResource;
 use App\Http\Resources\UserResource;
 use App\Models\UserTag;
-use App\Traits\responseTrait;
 use App\Traits\RestfulTrait;
 use App\Traits\rulesReturnTrait;
 use App\Models\Education;
 use App\Models\Experience;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Storage;
 
@@ -41,17 +40,16 @@ class UserProfileController extends apiController
     }// end of addEducation method
 
     public function updateEducation(Request $request , $id){
-
         $user_id = auth('user')->user()->id;
         $validate = $this->apiValidation($request ,[
             'qualification_id' => 'exists:qualifications,id',
             'instituation_name' => 'string',
             'study_field' => 'string',
             'start_date' => 'date',
-            'end_date' => 'nullable|date'
+            'end_date' => 'date'
         ]);
         if($validate instanceof Response) return $validate;
-        User::find($user_id)->educations()->where('id' , $id)->update($request->all());
+        User::find($user_id)->educations()->where('id' ,$id)->update($request->all());
         $education = Education::findOrFail($id);
         return $this->apiResponse(new EducationResource($education), self::STATUS_OK, __('auth.success'));
     }// end of updateEducation
@@ -99,7 +97,7 @@ class UserProfileController extends apiController
             'avatar' => 'image',
             'tags.*' => 'string'
         ]);
-        if($validate instanceof Response) return $valiadte;
+        if($validate instanceof Response) return $validate;
 
         if ($request->avatar) {
             if($request->avatar != 'default.jpg'){

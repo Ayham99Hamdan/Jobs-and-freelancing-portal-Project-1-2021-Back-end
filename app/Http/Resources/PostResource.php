@@ -34,8 +34,6 @@ class PostResource extends JsonResource
             'experience_years' => $this->experience_years,
             'description' => $this->description,
             'create_date' => $this->created_at,
-
-
         ];
     }
 }

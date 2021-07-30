@@ -64,7 +64,7 @@ class UserController extends apiController
 
         $token = $user->createToken('key')->plainTextToken; // shoule to change this or resee it
 
-        return $this->apiResponse(['user' => $user, 'token' => $token], self::STATUS_OK,__('auth.success'));
+        return $this->apiResponse(['user' => new UserResource($user), 'token' => $token], self::STATUS_OK,__('auth.success'));
     }
 
     public function logout()

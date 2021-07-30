@@ -97,31 +97,7 @@ class UserPostsController extends apiController
 
     public function getPostByTag(){
         $user = auth('user')->user();
-//        $posts = Post::where('job_role_id' , $user->job_role_id)->get();
-//        $end_posts = null;
-//        $tags = User::where('id' , $user->id)->first()->tags()->get();
-//        foreach($tags as $tag){
-//            foreach($posts as $post){
-//
-//                $select = $post->with(['tags'=>function($q) use ($tag){
-//
-//                    return $q->where('tag' , $tag);
-//
-//                }]);
-//                return $select->first();
-//                if($select){
-//
-//                    $end_posts = $select;
-//
-//                }
-//
-//            }
-//
-//
-//        }
-//        return $end_posts->get();
-
-
+        
         $posts = DB::table('user_tags')->where('user_id' , $user->id)->join('post_tags' , function($q) use ($user){
 
             $q->on('user_tags.tag' , 'like' ,'post_tags.tag');

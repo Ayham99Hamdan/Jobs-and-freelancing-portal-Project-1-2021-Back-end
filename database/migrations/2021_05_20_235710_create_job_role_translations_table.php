@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateJobRolesTable extends Migration
+class CreateJobRoleTranslationsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,13 @@ class CreateJobRolesTable extends Migration
      */
     public function up()
     {
-        Schema::create('job_roles', function (Blueprint $table) {
+        Schema::create('job_role_translations', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('job_role_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
+            $table->string('name');
+            $table->string('locale')->index();
+            $table->unique(['job_role_id' , 'locale']);
             $table->timestamps();
-
         });
     }
 
@@ -27,6 +30,6 @@ class CreateJobRolesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('job_roles');
+        Schema::dropIfExists('job_role_transaltions');
     }
 }
