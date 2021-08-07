@@ -27,7 +27,6 @@ class UserProfileController extends apiController
 
         $user = auth('user')->user();
         $validate = $this->apiValidation($request , [
-
             'qualification_id' => 'required|exists:qualifications,id',
             'instituation_name' => 'required|string',
             'study_field' => 'required|string',

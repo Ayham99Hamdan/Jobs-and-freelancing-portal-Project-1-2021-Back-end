@@ -21,7 +21,6 @@ class EducationResource extends JsonResource
         'study_field' => $this->study_field,
         'start_date' => $this->start_date,
         'end_date' => $this->end_field
-
         ];
     }
 }
