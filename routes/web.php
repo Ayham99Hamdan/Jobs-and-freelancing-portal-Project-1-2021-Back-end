@@ -13,6 +13,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::namespace('Dashboard')->middleware('locale')->prefix('Dashboard')->group(function () {
+    Route::resource('qualification', 'QualificationController')->only('index');
 });

@@ -9,7 +9,7 @@ use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-class QualificationDataTables extends DataTable
+class QualificationDataTable extends DataTable
 {
     /**
      * Build DataTable class.
@@ -21,7 +21,7 @@ class QualificationDataTables extends DataTable
     {
         return datatables()
             ->eloquent($query)
-            ->addColumn('action', 'qualificationdatatables.action');
+            ->addColumn('action', 'qualificationdatatable.action');
     }
 
     /**
@@ -43,18 +43,10 @@ class QualificationDataTables extends DataTable
     public function html()
     {
         return $this->builder()
-                    ->setTableId('qualificationdatatables-table')
+                    ->setTableId('qualificationdatatable-table')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
-                    ->dom('Bfrtip')
-                    ->orderBy(1)
-                    ->buttons(
-                        Button::make('create'),
-                        Button::make('export'),
-                        Button::make('print'),
-                        Button::make('reset'),
-                        Button::make('reload')
-                    );
+                    ->orderBy(1);
     }
 
     /**
@@ -65,15 +57,9 @@ class QualificationDataTables extends DataTable
     protected function getColumns()
     {
         return [
-            Column::computed('action')
-                  ->exportable(false)
-                  ->printable(false)
-                  ->width(60)
-                  ->addClass('text-center'),
-            Column::make('id'),
-            Column::make('add your columns'),
-            Column::make('created_at'),
-            Column::make('updated_at'),
+            'id',
+            'name:en',
+            'name:ar'
         ];
     }
 
@@ -84,6 +70,6 @@ class QualificationDataTables extends DataTable
      */
     protected function filename()
     {
-        return 'QualificationDataTables_' . date('YmdHis');
+        return 'Qualification_' . date('YmdHis');
     }
 }
