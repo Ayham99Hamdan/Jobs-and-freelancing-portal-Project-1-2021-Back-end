@@ -3,5 +3,6 @@
 
 return [
     'user' => 'User',
+    'dashboard' => 'Dashboard'
 
 ];

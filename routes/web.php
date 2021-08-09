@@ -14,5 +14,5 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::namespace('Dashboard')->middleware('locale')->prefix('Dashboard')->group(function () {
-    Route::resource('qualification', 'QualificationController')->only('index');
+    Route::get('datatables' , 'QualificationController@index')->name('h');
 });

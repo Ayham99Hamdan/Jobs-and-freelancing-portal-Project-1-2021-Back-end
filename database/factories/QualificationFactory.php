@@ -9,6 +9,6 @@ use Faker\Generator as Faker;
 $factory->define(Qualification::class, function (Faker $faker) {
     return [
         'name:en' => $faker->name,
-        'name:ar' => 'الحمدلله'
+        'name:ar' => \Faker\Provider\ar_JO\Person::firstNameMale()
     ];
 });

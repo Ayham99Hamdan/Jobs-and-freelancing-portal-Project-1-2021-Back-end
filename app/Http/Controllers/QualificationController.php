@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+
 use App\Http\Resources\QualificationResource;
 use App\Models\Qualification;
-use Illuminate\Http\Request;
 
 class QualificationController extends apiController
 {
