@@ -18,7 +18,7 @@ class DetectLocale
         if($locale = $request->header('locale')){
 
             app()->setlocale($locale);
-
+            
         }
         return $next($request);
     }

@@ -27,7 +27,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = 'Dashboard/datatables';
+    protected $redirectTo = 'Dashboard/';
 
     protected function guard(){
         return Auth::guard('admin');

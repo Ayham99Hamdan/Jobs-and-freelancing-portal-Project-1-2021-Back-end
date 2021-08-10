@@ -13,11 +13,19 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::group(['prefix' => LaravelLocalization::setLocale()], function()
+{
+    Route::namespace('Dashboard')->middleware(['locale' , 'auth:admin'])->prefix('Dashboard')->group(function () {
+        Route::get('' , 'DashboardController@index')->name('dashboard');
 
-Route::namespace('Dashboard')->middleware(['locale' , 'auth:admin'])->prefix('Dashboard')->group(function () {
-    Route::get('datatables' , 'QualificationController@index')->name('qualification.index');
+        // Qualification  Routes
+        Route::get('qualifications' , 'QualificationController@index')->name('qualification.index');
+
+    });
+
+    // Login Routes
+    Auth::routes(['register' => false]);
 });
 
-Auth::routes(['register' => false]);
 
 Route::get('/home', 'HomeController@index')->name('home');

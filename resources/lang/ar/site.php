@@ -50,7 +50,7 @@ return [
 
     'permissions' => 'الصلاحيات',
 
-    'categories' => 'الاقسام',
+    'company' => 'الشركات',
     'all_categories' => 'كل الاقسام',
     'name' => 'الاسم',
     'description' => 'الوصف',
@@ -60,8 +60,10 @@ return [
     'show_products' => 'عرض المنتجات',
     'created_at' => 'تم اضافته',
 
-    'products' => 'المنتجات',
+
+    'employees' => 'الموظفين',
     'product' => 'المنتج',
+    'post'  => 'فرص العمل',
     'quantity' => 'الكميه',
     'total' => 'المجموع',
     'purchase_price' => 'سعر الشراء',
