@@ -10,4 +10,10 @@ return [
     'users' => 'Admins',
     'post' => 'Jobs',
 
+    'table' => [
+        'namear' => 'Name in Arabic',
+        'nameen' => 'Name in English',
+        'created_at' => 'Created at',
+    ],
+
 ];

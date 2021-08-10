@@ -28,10 +28,10 @@
                 <table class="table table-bordered data-table" style="color: #000;">
                     <thead>
                         <tr>
-                            <th>No</th>
-                            <th>Name</th>
-                            <th>Name Arabic</th>
-                            <th>create_at</th>
+                            <th>#</th>
+                            <th>@lang('site.table.namear')</th>
+                            <th>@lang('site.table.nameen')</th>
+                            <th>@lang('site.table.created_at')</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -57,8 +57,9 @@
             ajax: "{{ route('qualification.index') }}",
             columns: [
                 {data: 'id', name: 'id'},
-                {data: 'name', name: 'name'},
                 {data: 'namear', name: 'namear'},
+                {data: 'nameen', name: 'nameen'},
+                {data: 'created_at', name: 'created_at'},
                 {data: 'created_at', name: 'created_at'},
             ]
         });

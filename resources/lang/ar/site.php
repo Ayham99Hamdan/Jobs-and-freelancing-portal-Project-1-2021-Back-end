@@ -3,6 +3,7 @@
 return [
     'dashboard' => 'الرئيسيه',
     'logout' => 'تسجيل الخروج',
+    'qualification' => 'المؤهلات',
 
     'add' => 'اضف',
     'create' => 'اضافه',
@@ -71,6 +72,12 @@ return [
     'sale_price' => 'سعر البيع',
     'stock' => 'المخزن',
     'profit_percent' => 'المكسب',
+
+    'table' => [
+        'namear' => 'الاسم بالعربية',
+        'nameen' => 'الاسم بالانكليزية',
+        'created_at' => 'تاريخ الانشاء',
+    ],
 
     'ar' => [
         'name' => 'الاسم بالغه العربيه',
