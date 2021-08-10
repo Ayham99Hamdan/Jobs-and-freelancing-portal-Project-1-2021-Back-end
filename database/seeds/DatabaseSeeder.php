@@ -20,5 +20,7 @@ class DatabaseSeeder extends Seeder
         factory(\App\Models\Experience::class,40)->create();
         factory(\App\Models\Post::class,300)->create();
         factory(\App\Models\Reaction::class,50)->create();
+        $this->call(RolesAndPermmsionsSeeder::class);
+        $this->call(AdminSeeder::class);
     }
 }

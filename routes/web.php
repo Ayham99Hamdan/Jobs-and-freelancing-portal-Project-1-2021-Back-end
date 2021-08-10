@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +14,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::namespace('Dashboard')->middleware('locale')->prefix('Dashboard')->group(function () {
-    Route::get('datatables' , 'QualificationController@index')->name('h');
+Route::namespace('Dashboard')->middleware(['locale' , 'auth:admin'])->prefix('Dashboard')->group(function () {
+    Route::get('datatables' , 'QualificationController@index')->name('qualification.index');
 });
+
+Auth::routes(['register' => false]);
+
+Route::get('/home', 'HomeController@index')->name('home');

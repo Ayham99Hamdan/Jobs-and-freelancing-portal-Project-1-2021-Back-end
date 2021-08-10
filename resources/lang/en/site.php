@@ -3,6 +3,7 @@
 
 return [
     'user' => 'User',
-    'dashboard' => 'Dashboard'
+    'dashboard' => 'Dashboard',
+    'qualification' => 'Qualification',
 
 ];
