@@ -16,6 +16,9 @@ class QualificationController extends Controller
             return DataTables::eloquent($model)
             ->addColumn('namear' , function(Qualification $model){
                 return $model->translate('ar')->name;
+            })
+            ->addColumn('nameen' , function(Qualification $model){
+                return $model->translate('en')->name;
             })->toJson();
         }
         return view('Dashboard.Qualification');
