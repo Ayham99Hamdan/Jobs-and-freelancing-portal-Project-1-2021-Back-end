@@ -8,7 +8,8 @@
         <h1>@lang('site.qualification')</h1>
 
         <ol class="breadcrumb">
-            {{-- <li><a href="{{ route('dashboard.index') }}"><i class="fa fa-dashboard"></i> @lang('site.dashboard')</a></li> --}}
+
+            <li><a href="{{ route('dashboard') }}"><i class="fa fa-dashboard"></i> @lang('site.dashboard')</a></li>
             <li class="active">@lang('site.qualification')</li>
         </ol>
     </section>
@@ -19,12 +20,14 @@
 
             <div class="box-header with-border">
 
-                {{-- <h3 class="box-title" style="margin-bottom: 15px">@lang('site.products') <small>{{ $products->total()}}</small></h3> --}}
 
             </div><!-- end of box header -->
 
             <div class="box-body">
-
+                <a href= "{{route('qualification.create')}}"class="btn btn-primary "><i class="fa fa-plus"></i>@lang('site.add')</a>
+                <div class="col-md-4">
+                    <input class="search" type="text" name="search"  class="form-control" placeholder="@lang('site.search')" value="{{ request()->search }}">
+                </div>
                 <table class="table table-bordered data-table" style="color: #000;">
                     <thead>
                         <tr>
@@ -32,6 +35,7 @@
                             <th>@lang('site.table.namear')</th>
                             <th>@lang('site.table.nameen')</th>
                             <th>@lang('site.table.created_at')</th>
+                            <th>@lang('site.table.actions')</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -51,19 +55,33 @@
 @push('scripts')
 <script type="text/javascript">
     $(document).ready(function() {
-        $('.data-table').DataTable({
-            processing: true,
+        fill();
+        function fill(search = ''){
+            $('.data-table').DataTable({
+            searching:false,
+            processing: false,
             serverSide: true,
-            ajax: "{{ route('qualification.index') }}",
+            ajax: {
+                url:"{{ route('qualification.index') }}",
+                data : {search:search}
+            },
             columns: [
                 {data: 'id', name: 'id'},
                 {data: 'namear', name: 'namear'},
                 {data: 'nameen', name: 'nameen'},
                 {data: 'created_at', name: 'created_at'},
-                {data: 'created_at', name: 'created_at'},
+                {data: 'action' , name: 'actions'}
             ]
         });
+        }
+        $('.search').on('input' , function(){
+            $('.data-table').DataTable().destroy();
+
+            fill($(this).val());
+        });
+
     });
+
 </script>
 @endpush
 

@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Dashboard\QualificationController;
+use App\Models\Qualification;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -21,6 +23,11 @@ Route::group(['prefix' => LaravelLocalization::setLocale() ,
 
         // Qualification  Routes
         Route::get('qualifications' , 'QualificationController@index')->name('qualification.index');
+        Route::get('qualifciations/{qualification}', 'QualificationController@edit')->name('qualification.edit');
+        Route::put('qualifications/{qualification}' , 'QualificationController@update')->name('qualification.update');
+        Route::delete('qualifications/{qualification}' , 'QualificationController@delete')->name('qualification.delete');
+        Route::get('qualifications/create' , 'QualificationController@create')->name('qualification.create');
+        Route::post('qualification' , 'QualificationController@store')->name('qualification.store');
 
     });
 

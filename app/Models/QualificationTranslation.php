@@ -7,5 +7,5 @@ use Illuminate\Database\Eloquent\Model;
 class QualificationTranslation extends Model
 {
     public $timestamps = false;
-    protected $fillable = ['name'];
+    protected $fillable = ['name' , 'locale' , 'qualification_id'];
 }

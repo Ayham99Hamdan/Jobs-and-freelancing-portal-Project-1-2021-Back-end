@@ -130,7 +130,8 @@
 
     @yield('content')
 
-    {{-- @include('partials._session') --}}
+    @include('partials._session')
+
 
     <footer class="main-footer">
         <div class="pull-right hidden-xs">
