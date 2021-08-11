@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-{{-- <html dir="{{ LaravelLocalization::getCurrentLocaleDirection()}}"> --}}
+<html dir="{{ LaravelLocalization::getCurrentLocaleDirection()}}">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -22,6 +22,14 @@
             body, h1, h2, h3, h4, h5, h6 {
                 font-family: 'Cairo', sans-serif !important;
 
+            }
+            .dataTables_wrapper {
+                font-size: 13px;
+                direction: rtl;
+                position: relative;
+                clear: both;
+                *zoom: 1;
+                zoom: 1;
             }
         </style>
     @else
@@ -115,10 +123,27 @@
 
 
 
+                    <li class="nav-item dropdown">
+                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                            {{ Auth::user()->name }}
+                        </a>
 
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="{{ route('logout') }}"
+                               onclick="event.preventDefault();
+                                             document.getElementById('logout-form').submit();">
+                                {{ __('Logout') }}
+                            </a>
+
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                @csrf
+                            </form>
+                        </div>
+                    </li>
 
                         </ul>
                     </li>
+                    
                 </ul>
             </div>
         </nav>

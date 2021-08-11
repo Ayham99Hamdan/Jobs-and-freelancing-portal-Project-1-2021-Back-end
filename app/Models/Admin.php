@@ -17,7 +17,14 @@ class Admin extends Authenticatable
         'last_name' ,
         'email' ,
         'password',
+        'avatar'
     ];
+
+    protected $appends = ['avatar_path'];
+
+    public function getAvatarPathAttribute(){
+        return asset('uploads/admin_images/' . $this->avatar);
+    }
 
 
 
