@@ -54,9 +54,32 @@
 
                         <div class="form-group">
                             <label>@lang('site.image')</label>
-                            <input type="file" name="image" class="form-control">
+                            <input class="image" type="file" name="image" class="form-control">
+                            <img class="image-preview">
                         </div>
 
+                        @php
+                            $models = ['qualification' , 'job_role'];
+                            $maps = ['create' , 'update' , 'read' , 'delete'];
+                        @endphp
+
+                        <ul class="nav nav-tabs">
+                            @foreach ($models as $index => $model)
+                            <li class={{$index == 0 ? 'active' : ''}}> <a href="#{{$model}}" data-toggle="tab">@lang('site.' . $model)</a></li>
+                                
+                            @endforeach
+                        </ul>
+                        <div class="tab-content">
+                            @foreach ($models as $index => $model)
+                                <div class="tab-pane {{$index == 0 ? 'active' : ''}} " id="{{$model}}">
+                                    @foreach ($maps as $map)
+                                        <label><input type="checkbox" name="permissions[]" value="{{$model . ' ' . $map}}"> {{$map}}</label>
+                                    @endforeach
+                                </div>
+                            @endforeach
+              
+                            
+                        </div>
 
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary"><i class="fa fa-plus"></i> @lang('site.add')</button>

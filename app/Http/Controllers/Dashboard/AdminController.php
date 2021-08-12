@@ -12,8 +12,7 @@ use Intervention\Image\Facades\Image;
 
 class AdminController extends Controller
 {
-    public function index(Request $request){
-
+    public function index(Request $request){ 
         if($request->ajax()){
             if(!empty($request->search)){
                 $model = Admin::where('first_name' ,'like' ,'%' . $request->search . '%')
@@ -27,10 +26,10 @@ class AdminController extends Controller
                 })
                 ->addColumn('action', function($row){
                     $btn = '<a href=" ' . route('admin.edit' , $row->id) . '" class="edit btn btn-primary btn-lg" ><i class="fa fa-edit"></i>'  .  __("site.edit") .'</a>';
-                    $btn = $btn.'<form style="display: inline-block;" action=" ' . route('admin.delete' , $row->id) . ' " method="post" >
+                    $btn = $btn.'<form style="display: inline-block;" class="delete" action=" ' . route('admin.delete' , $row->id) . ' " method="post" >
                     '. csrf_field() . '
                     '. method_field("delete") .'
-                    <button type="submit" class="btn btn-danger delete btn-lg"><i class="fa fa-trash"></i> ' . __("site.delete") . '</button>';
+                    <button type="submit" class="btn btn-danger delete btn-lg" onclick="deleteElement(event)"><i class="fa fa-trash"></i> ' . __("site.delete") . '</button>';
 
                     return $btn;
             })
@@ -51,6 +50,7 @@ class AdminController extends Controller
             'email' => ['required' , Rule::unique('admins' , 'email')],
             'image' => 'image'
         ]);
+
         if ($request->image) {
 
             Image::make($request->image)->resize(300, 300, function ($constraint) {
@@ -60,11 +60,15 @@ class AdminController extends Controller
             $request['avatar'] = $request->image->hashName();
         }
         $request['password'] = bcrypt($request->password);
-        Admin::create($request->toArray());
+        Admin::create($request->toArray())
+        ->assignRole('admin')
+        ->givePermissionTo($request->permissions);
+
         return redirect()->route('admin.index');
     }
 
     public function edit(Admin $admin){
+        
         return view('Dashboard.admin.edit' , compact('admin'));
     }
 
@@ -86,7 +90,7 @@ class AdminController extends Controller
             $request['avatar'] = $request->image->hashName();
         }
         
-
+        $admin->syncPermissions($request->permissions);
         $admin->update($request->toArray());
         $admin->save();
         session()->flash('success' ,__('site.updated_successfully'));

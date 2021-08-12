@@ -25,6 +25,13 @@ return [
     'password' => 'كلمه المرور',
     'password_confirmation' => 'تاكيد كلمه المرور',
 
+    'admin' => 'المشرف',
+    'admins' => 'المشرفين',
+    'job_role' => 'مجال العمل',
+    'job_roles' => 'مجالات العمل',
+
+    'access_deneid' => 'غير مصرح لك بالدخول الي هذا الرابط',
+
     'added_successfully' => 'تم اضافه البيانات بنجاح',
     'updated_successfully' => 'تم تعديل البيانات بنجاح',
     'deleted_successfully' => 'تم حذف البيانات بنجاح',

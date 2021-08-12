@@ -24,11 +24,11 @@ class QualificationController extends Controller
                 ->addColumn('nameen' , function(Qualification $model){
                     return $model->translate('en')->name;
                 })->addColumn('action', function($row){
-                    $btn = '<a href=" ' . route('qualification.edit' , $row->id) . '" class="edit btn btn-primary btn-lg" ><i class="fa fa-edit"></i>'  .  __("site.edit") .'</a>';
-                    $btn = $btn.'<form style="display: inline-block;" action=" ' . route('qualification.delete' , $row->id) . ' " method="post" >
+                    $btn = '<a class="edit btn btn-primary btn-lg"' . (auth()->user()->can("qualification update") ? (" href='"  . route('qualification.edit' , $row->id) . "'")   : "disabled") . ' ><i class="fa fa-edit"></i>'  .  __("site.edit") .'</a>';
+                    $btn = $btn.'<form style="display: inline-block;" class="delete" action=" ' . route('qualification.delete' , $row->id) . ' " method="post" >
                     '. csrf_field() . '
                     '. method_field("delete") .'
-                    <button type="submit" class="btn btn-danger delete btn-lg"><i class="fa fa-trash"></i> ' . __("site.delete") . '</button>';
+                    <button type="submit" class="btn btn-danger delete btn-lg" onclick="deleteElement(event)" ' . (auth()->user()->can("qualification delete") ? null : "disabled") . '><i class="fa fa-trash"></i> ' . __("site.delete") . '</button> </form>';
 
                     return $btn;
             })

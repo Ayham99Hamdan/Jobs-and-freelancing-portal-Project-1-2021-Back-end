@@ -2,7 +2,7 @@
 
 @section('content')
 
-    {{-- @include('partials._session') --}}
+    @include('partials._session')
     <div class="content-wrapper">
 
         <section class="content-header">
@@ -22,7 +22,7 @@
                 <div class="col-lg-3 col-xs-6">
                     <div class="small-box bg-aqua">
                         <div class="inner">
-                            {{-- <h3>{{ $categories_count }}</h3> --}}
+                            <h3>10</h3>
 
                             <p>@lang('site.company')</p>
                         </div>
@@ -37,7 +37,7 @@
                 <div class="col-lg-3 col-xs-6">
                     <div class="small-box bg-green">
                         <div class="inner">
-                            {{-- <h3>{{ $products_count }}</h3> --}}
+                            <h3>21</h3>
 
                             <p>@lang('site.employees')</p>
                         </div>
@@ -52,7 +52,7 @@
                 <div class="col-lg-3 col-xs-6">
                     <div class="small-box bg-red">
                         <div class="inner">
-                            {{-- <h3>{{ $clients_count }}</h3> --}}
+                            <h3>80</h3>
 
                             <p>@lang('site.post')</p>
                         </div>
@@ -67,14 +67,20 @@
                 <div class="col-lg-3 col-xs-6">
                     <div class="small-box bg-yellow">
                         <div class="inner">
-                            {{-- <h3>{{ $users_count }}</h3> --}}
+                            <h3>{{ $admin_count }}</h3>
 
-                            <p>@lang('site.users')</p>
+                            <p>@lang('site.admins')</p>
                         </div>
                         <div class="icon">
                             <i class="fa fa-users"></i>
                         </div>
-                        {{-- <a href="{{ route('dashboard.users.index') }}" class="small-box-footer">@lang('site.read') <i class="fa fa-arrow-circle-right"></i></a> --}}
+                        @if (auth()->user()->hasRole('super-admin'))
+                            <a href="{{ route('admin.index') }}" class="small-box-footer">@lang('site.read') <i class="fa fa-arrow-circle-right"></i></a>    
+                        @else
+                        <a href="#" class="small-box-footer">@lang('site.read') <i class="fa fa-arrow-circle-right"></i></a>
+                        @endif
+
+                        
                     </div>
                 </div>
 

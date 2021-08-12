@@ -12,12 +12,17 @@
           </div>
 
         <ul class="sidebar-menu" data-widget="tree">
-            <li><a href="{{route('qualification.index')}}"><i class="fa fa-th"></i><span>@lang('site.qualification')</span></a></li>
+            @if (auth()->user()->hasRole('super-admin'))
             <li><a href="{{ route('admin.index') }}"><i class="fa fa-users"></i><span>@lang('site.admins')</span></a></li>
+            @endif
+            
+            @if(auth()->user()->can('qualification read'))
+            <li><a href="{{route('qualification.index')}}"><i class="fa fa-th"></i><span>@lang('site.qualification')</span></a></li>
+            @endif
            
-            {{-- @if (auth()->user()->hasPermission('categories_read')) --}}
-                {{-- <li><a href="{{ route('dashboard.categories.index') }}"><i class="fa fa-list-alt"></i><span>@lang('site.categories')</span></a></li> --}}
-            {{-- @endif --}}
+            @if (auth()->user()->can('job_role read')) 
+                <li><a href="{{ route('jobRole.index') }}"><i class="fa fa-list-alt"></i><span>@lang('site.job_role')</span></a></li>
+            @endif
             {{-- @if (auth()->user()->hasPermission('products_read')) --}}
                 {{-- <li><a href="{{ route('dashboard.products.index') }}"><i class="fa fa-product-hunt"></i><span>@lang('site.products')</span></a></li> --}}
             {{-- @endif --}}

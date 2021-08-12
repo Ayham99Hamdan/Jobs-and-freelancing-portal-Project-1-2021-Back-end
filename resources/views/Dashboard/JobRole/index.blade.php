@@ -5,12 +5,12 @@
 
     <section class="content-header">
 
-        <h1>@lang('site.admin')</h1>
+        <h1>@lang('site.job_role')</h1>
 
         <ol class="breadcrumb">
 
             <li><a href="{{ route('dashboard') }}"><i class="fa fa-dashboard"></i> @lang('site.dashboard')</a></li>
-            <li class="active">@lang('site.admin')</li>
+            <li class="active">@lang('site.job_role')</li>
         </ol>
     </section>
 
@@ -24,7 +24,7 @@
             </div><!-- end of box header -->
 
             <div class="box-body">
-                <a href= "{{route('admin.create')}}" class="btn btn-primary btn-lg"><i class="fa fa-plus"></i>@lang('site.add')</a>
+                <a class="btn btn-primary btn-lg" @if(!auth()->user()->can('job_role create')) disabled @else href= "{{route('jobRole.create')}}" @endif ><i class="fa fa-plus"></i>@lang('site.add')</a>
                 <div class="col-md-4">
                     <input class="search" type="text" name="search"  class="form-control" placeholder="@lang('site.search')" value="{{ request()->search }}">
                 </div>
@@ -32,10 +32,8 @@
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>@lang('site.first_name')</th>
-                            <th>@lang('site.last_name')</th>
-                            <th>@lang('site.email')</th>
-                            <th>@lang('site.image')</th>
+                            <th>@lang('site.table.namear')</th>
+                            <th>@lang('site.table.nameen')</th>
                             <th>@lang('site.table.created_at')</th>
                             <th>@lang('site.table.actions')</th>
                         </tr>
@@ -64,15 +62,13 @@
             processing: false,
             serverSide: true,
             ajax: {
-                url:"{{ route('admin.index') }}",
+                url:"{{ route('jobRole.index') }}",
                 data : {search:search}
             },
             columns: [
                 {data: 'id', name: 'id'},
-                {data: 'first_name', name: 'first_name'},
-                {data: 'last_name', name: 'last_name'},
-                {data: 'email' , name: 'email'},
-                {data: 'avatar' , name : 'avatar'},
+                {data: 'namear', name: 'namear'},
+                {data: 'nameen', name: 'nameen'},
                 {data: 'created_at', name: 'created_at'},
                 {data: 'action' , name: 'actions'}
             ]
@@ -80,10 +76,8 @@
         }
         $('.search').on('input' , function(){
             $('.data-table').DataTable().destroy();
-                fill($(this).val());
-            });
-
-            
+            fill($(this).val());
+        });
     });
 </script>
 @endpush

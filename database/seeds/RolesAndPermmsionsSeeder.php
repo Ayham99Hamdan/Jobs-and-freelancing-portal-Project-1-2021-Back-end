@@ -23,9 +23,16 @@ class RolesAndPermmsionsSeeder extends Seeder
         Permission::create(['name' => 'qualification create', 'guard_name' => 'admin']);
         Permission::create(['name' => 'qualification delete', 'guard_name' => 'admin']);
 
+        Permission::create(['name' => 'job_role read', 'guard_name' => 'admin']);
+        Permission::create(['name' => 'job_role update', 'guard_name' => 'admin']);
+        Permission::create(['name' => 'job_role create', 'guard_name' => 'admin']);
+        Permission::create(['name' => 'job_role delete', 'guard_name' => 'admin']);
+
         // Create Roles
         Role::create(['name' => 'super-admin' , 'guard_name' => 'admin'])
             ->givePermissionTo(Permission::all());
+        Role::create(['name' => 'admin' ,  'guard_name' => 'admin']);
+        
 
 
 

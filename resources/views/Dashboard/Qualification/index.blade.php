@@ -24,7 +24,8 @@
             </div><!-- end of box header -->
 
             <div class="box-body">
-                <a href= "{{route('qualification.create')}}"class="btn btn-primary "><i class="fa fa-plus"></i>@lang('site.add')</a>
+                
+                <a class="btn btn-primary btn-lg" @if(!auth()->user()->can('qualification create')) disabled @else href= "{{route('qualification.create')}}"@endif><i class="fa fa-plus"></i>@lang('site.add')</a>
                 <div class="col-md-4">
                     <input class="search" type="text" name="search"  class="form-control" placeholder="@lang('site.search')" value="{{ request()->search }}">
                 </div>
@@ -78,9 +79,7 @@
             $('.data-table').DataTable().destroy();
             fill($(this).val());
         });
-
     });
-
 </script>
 @endpush
 

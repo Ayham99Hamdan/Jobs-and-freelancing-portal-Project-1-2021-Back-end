@@ -44,10 +44,32 @@
 
                         <div class="form-group">
                             <label>@lang('site.image')</label>
-                            <input type="file" name="image" class="form-control">
-                            <img src="{{$admin->avatar_path}} " class="img-thumbnail" style="width: 100px">
+                            <input type="file" name="image" class="form-control image">
+                            <img src="{{$admin->avatar_path}} " class="img-thumbnail image-preview" style="width: 100px">
                         </div>
 
+                        @php
+                            $models = ['qualification' , 'job_role'];
+                            $maps = ['create' , 'update' , 'read' , 'delete'];
+                        @endphp
+
+                        <ul class="nav nav-tabs">
+                            @foreach ($models as $index => $model)
+                            <li class={{$index == 0 ? 'active' : ''}}> <a href="#{{$model}}" data-toggle="tab">@lang('site.' . $model)</a></li>
+                                
+                            @endforeach
+                        </ul>
+                        <div class="tab-content">
+                            @foreach ($models as $index => $model)
+                                <div class="tab-pane {{$index == 0 ? 'active' : ''}} " id="{{$model}}">
+                                    @foreach ($maps as $map)
+                                        <label><input type="checkbox" name="permissions[]" value="{{$model . ' ' . $map}}" @if ($admin->hasPermissionTo($model . ' ' . $map))
+                                          checked  
+                                        @endif> {{$map}}</label>
+                                    @endforeach
+                                </div>
+                            @endforeach
+                        </div>
 
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary"><i class="fa fa-edit"></i> @lang('site.edit')</button>

@@ -3,11 +3,11 @@
 @section('content')
     <div class="content-wrapper">
         <section class="content-header">
-            <h1>@lang('site.clients')</h1>
+            <h1>@lang('site.job_role')</h1>
 
             <ol class="breadcrumb">
                 <li><a href="{{ route('dashboard') }}"><i class="fa fa-dashboard"></i> @lang('site.dashboard')</a></li>
-                <li><a href="{{ route('qualification.index') }}"> @lang('site.qualification')</a></li>
+                <li><a href="{{ route('jobRole.index') }}"> @lang('site.job_role')</a></li>
                 <li class="active">@lang('site.edit')</li>
             </ol>
         </section>
@@ -22,19 +22,19 @@
                 <div class="box-body">
 
                     @include('partials._errors')
-                    <form action="{{ route('qualification.update', $qualification->id) }}" method="post">
+                    <form action="{{ route('jobRole.update', $jobRole->id) }}" method="post">
 
                         {{ csrf_field() }}
                         {{ method_field('put') }}
 
                         <div class="form-group">
                             <label>@lang('site.table.namear')</label>
-                            <input type="text" name="name_ar" class="form-control" value="{{old('namear' , $qualification->translate('ar')->name)}}">
+                            <input type="text" name="name_ar" class="form-control" value="{{old('namear' , $jobRole->translate('ar')->name)}}">
                         </div>
 
                         <div class="form-group">
                             <label>@lang('site.table.nameen')</label>
-                            <input type="text" name="name_en" class="form-control" value="{{old('namear' , $qualification->translate('en')->name)}}">
+                            <input type="text" name="name_en" class="form-control" value="{{old('namear' , $jobRole->translate('en')->name)}}">
                         </div>
 
                         <div class="form-group">

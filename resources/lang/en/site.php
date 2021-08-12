@@ -12,6 +12,8 @@ return [
     'add' => 'Create',
     'admin' => 'Admin',
     'admins' => 'Admins',
+    'job_role' => 'Job Role',
+    'job_roles' => 'Job Roles',
     'delete' => 'Delete',
     'search' => 'search',
     'email' => 'Email',
@@ -25,6 +27,7 @@ return [
 
     // Noty sectances
     'updated_successfully' => 'Data are Updated Successfully',
+    'access_deneid' => 'You not authorized to access this link',
 
     'table' => [
         'namear' => 'Name in Arabic',

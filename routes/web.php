@@ -22,20 +22,31 @@ Route::group(['prefix' => LaravelLocalization::setLocale() ,
         Route::get('' , 'DashboardController@index')->name('dashboard');
 
         // Qualification  Routes
-        Route::get('qualifications' , 'QualificationController@index')->name('qualification.index');
-        Route::get('qualifciations/{qualification}', 'QualificationController@edit')->name('qualification.edit');
-        Route::put('qualifications/{qualification}' , 'QualificationController@update')->name('qualification.update');
-        Route::delete('qualifications/{qualification}' , 'QualificationController@delete')->name('qualification.delete');
-        Route::get('qualifications/create' , 'QualificationController@create')->name('qualification.create');
-        Route::post('qualification' , 'QualificationController@store')->name('qualification.store');
+        Route::middleware('can:qualification read')->get('qualifications' , 'QualificationController@index')->name('qualification.index');
+        Route::middleware('can:qualification update')->get('qualifictions/{qualification}', 'QualificationController@edit')->name('qualification.edit');
+        Route::middleware('can:qualification update')->put('qualifications/{qualification}' , 'QualificationController@update')->name('qualification.update');
+        Route::middleware('can:qualification delete')->delete('qualifications/{qualification}' , 'QualificationController@delete')->name('qualification.delete');
+        Route::middleware('can:qualification create')->get('qualifications/create' , 'QualificationController@create')->name('qualification.create');
+        Route::middleware('can:qualification create')->post('qualification' , 'QualificationController@store')->name('qualification.store');
 
         // Admins Routes
-       Route::get('admins' , 'AdminController@index')->name('admin.index');
-       Route::get('admins/{admin}', 'AdminController@edit')->name('admin.edit');
-       Route::put('admins/{admin}', 'AdminController@update')->name('admin.update');
-       Route::get('admin/create', 'AdminController@create')->name('admin.create');
-       Route::post('admins', 'AdminController@store')->name('admin.store');
-       Route::delete('admins/{admin}', 'AdminController@delete')->name('admin.delete');
+        Route::middleware('role:super-admin')->group(function () {
+            Route::get('admins' , 'AdminController@index')->name('admin.index');
+            Route::get('admins/{admin}', 'AdminController@edit')->name('admin.edit');
+            Route::put('admins/{admin}', 'AdminController@update')->name('admin.update');
+            Route::get('admin/create', 'AdminController@create')->name('admin.create');
+            Route::post('admins', 'AdminController@store')->name('admin.store');
+            Route::delete('admins/{admin}', 'AdminController@delete')->name('admin.delete');
+        });
+       
+
+       // Job Roles Routes
+       Route::middleware('can:job_role read')->get('job-roles' , 'JobRoleController@index')->name('jobRole.index');
+        Route::middleware('can:job_role update')->get('job-roles/{jobRole}', 'JobRoleController@edit')->name('jobRole.edit');
+        Route::middleware('can:job_role update')->put('job-roles/{jobRole}' , 'JobRoleController@update')->name('jobRole.update');
+        Route::middleware('can:job_role delete')->delete('job-roles/{jobRole}' , 'JobRoleController@delete')->name('jobRole.delete');
+        Route::middleware('can:job_role create')->get('job-role/create' , 'JobRoleController@create')->name('jobRole.create');
+        Route::middleware('can:job_role create')->post('job-role' , 'JobRoleController@store')->name('jobRole.store');
 
 
     });

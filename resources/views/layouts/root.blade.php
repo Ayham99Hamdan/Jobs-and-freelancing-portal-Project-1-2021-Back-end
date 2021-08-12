@@ -86,6 +86,9 @@
     {{--<!-- iCheck -->--}}
     <link rel="stylesheet" href="{{ asset('dashboard_files/plugins/icheck/all.css') }}">
 
+    {{-- custom style --}}
+    <link rel="stylesheet" href="{{ asset('css/custom.css')}}">
+
     {{--html in  ie--}}
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -115,14 +118,9 @@
             </a> --}}
 
             <div class="navbar-custom-menu">
-                <ul class="nav navbar-nav">
+                <ul class="nav navbar-nav ml-auto">
 
                     <!-- Messages: style can be found in dropdown.less-->
-
-
-
-
-
                     <li class="nav-item dropdown">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                             {{ Auth::user()->name }}
@@ -141,8 +139,8 @@
                         </div>
                     </li>
 
-                        </ul>
-                    </li>
+                        
+                    
                     
                 </ul>
             </div>
@@ -208,52 +206,30 @@
             checkboxClass: 'icheckbox_minimal-blue',
             radioClass: 'iradio_minimal-blue'
         });
-
-        //delete
-        $('.delete').click(function (e) {
-
-            var that = $(this)
-
-            e.preventDefault();
-
-            var n = new Noty({
-                text: "@lang('site.confirm_delete')",
-                type: "warning",
-                killer: true,
-                buttons: [
-                    Noty.button("@lang('site.yes')", 'btn btn-success mr-2', function () {
-                        that.closest('form').submit();
-                    }),
-
-                    Noty.button("@lang('site.no')", 'btn btn-primary mr-2', function () {
-                        n.close();
-                    })
-                ]
-            });
-
-            n.show();
-
-        });//end of delete
-
-        // // image preview
-        // $(".image").change(function () {
-        //
-        //     if (this.files && this.files[0]) {
-        //         var reader = new FileReader();
-        //
-        //         reader.onload = function (e) {
-        //             $('.image-preview').attr('src', e.target.result);
-        //         }
-        //
-        //         reader.readAsDataURL(this.files[0]);
-        //     }
-        //
-        // });
-
         CKEDITOR.config.language =  "{{ app()->getLocale() }}";
 
     });//end of ready
 
+    // delete element caution 
+    function deleteElement(e){
+        e.preventDefault();
+                var n = new Noty({
+                    text: "@lang('site.confirm_delete')",
+                    type: "warning",
+                    killer: true,
+                    buttons: [
+                        Noty.button("@lang('site.yes')", 'btn btn-success mr-2', function () {
+                            $('form.delete').submit();
+                        }),
+
+                        Noty.button("@lang('site.no')", 'btn btn-primary mr-2', function () {
+                            n.close();
+                        })
+                    ]
+                });
+
+                n.show();
+    }
 </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
 <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
