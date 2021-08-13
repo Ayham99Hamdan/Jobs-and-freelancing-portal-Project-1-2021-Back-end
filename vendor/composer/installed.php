@@ -5,7 +5,7 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => 'feb68974ef88ff6347df4a0c7aef911e0014b3e8',
+        'reference' => 'c08c0f1ed2c9dae20d277c431100be3240779277',
         'name' => 'laravel/laravel',
         'dev' => true,
     ),
@@ -406,7 +406,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => 'feb68974ef88ff6347df4a0c7aef911e0014b3e8',
+            'reference' => 'c08c0f1ed2c9dae20d277c431100be3240779277',
             'dev_requirement' => false,
         ),
         'laravel/sanctum' => array(
@@ -482,12 +482,12 @@
             'dev_requirement' => false,
         ),
         'maatwebsite/excel' => array(
-            'pretty_version' => '3.1.32',
-            'version' => '3.1.32.0',
+            'pretty_version' => '3.1.33',
+            'version' => '3.1.33.0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../maatwebsite/excel',
             'aliases' => array(),
-            'reference' => '9dc29b63a77fb7f2f514ef754af3a1b57e83cadf',
+            'reference' => 'b2de5ba92c5c1ad9415f0eb7c72838fb3eaaa5b8',
             'dev_requirement' => false,
         ),
         'maennchen/zipstream-php' => array(
@@ -855,18 +855,18 @@
             'dev_requirement' => false,
         ),
         'ramsey/uuid' => array(
-            'pretty_version' => '4.2.0',
-            'version' => '4.2.0.0',
+            'pretty_version' => '4.2.1',
+            'version' => '4.2.1.0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../ramsey/uuid',
             'aliases' => array(),
-            'reference' => '7231612a5221f5524d3575bebdce20eeef8547a1',
+            'reference' => 'fe665a03df4f056aa65af552a96e1976df8c8dae',
             'dev_requirement' => false,
         ),
         'rhumsaa/uuid' => array(
             'dev_requirement' => false,
             'replaced' => array(
-                0 => '4.2.0',
+                0 => '4.2.1',
             ),
         ),
         'sebastian/cli-parser' => array(

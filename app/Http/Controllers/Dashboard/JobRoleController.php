@@ -24,7 +24,7 @@ class JobRoleController extends Controller
                 ->addColumn('nameen' , function(JobRole $model){
                     return $model->translate('en')->name;
                 })->addColumn('action', function($row){
-                    $btn = '<a  class="edit btn btn-primary btn-lg" ' . (auth()->user()->can("job_role update") ? (" href = '"  . route('jobRole.edit' , $row->id) . "'")   : "disabled") . ' ><i class="fa fa-edit"></i>'  .  __("site.edit") .'</a>';
+                    $btn = '<a  class="edit btn btn-success btn-lg" style="margin:5px;"' . (auth()->user()->can("job_role update") ? (" href = '"  . route('jobRole.edit' , $row->id) . "'")   : "disabled") . ' ><i class="fa fa-edit"></i>'  .  __("site.edit") .'</a>';
                     $btn = $btn.'<form style="display: inline-block;" class="delete" action=" ' . route('jobRole.delete' , $row->id) . ' " method="post" >
                     '. csrf_field() . '
                     '. method_field("delete") .'
@@ -32,6 +32,9 @@ class JobRoleController extends Controller
 
                     return $btn;
             })
+            ->editColumn('created_at', function (JobRole $jobRole) {
+                return $jobRole->created_at->format('Y-m-d h:i'); // human readable format
+              })
             ->rawColumns(['action'])
             ->toJson();
         }

@@ -27,7 +27,7 @@
                             <p>@lang('site.company')</p>
                         </div>
                         <div class="icon">
-                            <i class="ion ion-bag"></i>
+                            <i class="fa fa-building"></i>
                         </div>
                         {{-- <a href="{{ route('dashboard.categories.index') }}" class="small-box-footer">@lang('site.read') <i class="fa fa-arrow-circle-right"></i></a> --}}
                     </div>
@@ -37,14 +37,14 @@
                 <div class="col-lg-3 col-xs-6">
                     <div class="small-box bg-green">
                         <div class="inner">
-                            <h3>21</h3>
+                            <h3>{{$user_count}}</h3>
 
                             <p>@lang('site.employees')</p>
                         </div>
                         <div class="icon">
-                            <i class="ion ion-stats-bars"></i>
+                            <i class="fa fa-user"></i>
                         </div>
-                        {{-- <a href="{{ route('dashboard.products.index') }}" class="small-box-footer">@lang('site.read') <i class="fa fa-arrow-circle-right"></i></a> --}}
+                        <a href="{{ route('user.index') }}" class="small-box-footer">@lang('site.read') <i class="fa fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
 
@@ -57,7 +57,7 @@
                             <p>@lang('site.post')</p>
                         </div>
                         <div class="icon">
-                            <i class="fa fa-user"></i>
+                            <i class="fa fa-search"></i>
                         </div>
                         {{-- <a href="{{ route('dashboard.clients.index') }}" class="small-box-footer">@lang('site.read') <i class="fa fa-arrow-circle-right"></i></a> --}}
                     </div>

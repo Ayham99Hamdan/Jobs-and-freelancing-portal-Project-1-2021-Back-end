@@ -3,7 +3,19 @@
 return [
     'dashboard' => 'الرئيسيه',
     'logout' => 'تسجيل الخروج',
+    'educations' => 'التعليم',
+    'experiences' => 'الخبرات',
+    'job_title' => 'عنوان الوظيفة',
+    'company_name' => 'اسم الشركة',
+    'male' => 'ذكر',
+    'tags' => 'الأعمال المرغوب بها',
+    'female' => 'أنثى',
     'qualification' => 'المؤهلات',
+    'instituation_name' => 'اسم المؤسسة',
+    'study_field' => 'مجال الدراسة',
+    'graduation_rate' => 'معدل التخرج',
+    'start_date' => 'تاريخ البداية',
+    'end_date' => 'تاريخ النهاية',
 
     'add' => 'اضف',
     'create' => 'اضافه',
@@ -52,7 +64,9 @@ return [
     'user' => 'المستخدم',
     'first_name' => 'الاسم الاول',
     'last_name' => 'الاسم الاخير',
+    'full_name' => 'الاسم الكامل',
     'email' => 'البريد الاكتروني',
+    'gender' => 'الجنس',
     'image' => 'صوره',
     'action' => 'اكشن',
 
@@ -83,7 +97,7 @@ return [
     'table' => [
         'namear' => 'الاسم بالعربية',
         'nameen' => 'الاسم بالانكليزية',
-        'created_at' => 'تاريخ الانشاء',
+        'created_at' =>  'تم اضافته',
         'actions' => 'أحداث'
     ],
 

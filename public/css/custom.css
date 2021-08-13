@@ -1,1 +1,50 @@
+.educations , .experiences{
+    background-color: #1D2228;
+    padding: 5px;
+    border-radius: 10px;
+    border: 1px solid #DDD;
+    color: #FFF;
+}
+
+.educations h2 , .experiences h2 {
+    margin-bottom: 10px;
+}
+
+.education , .experience{
+    padding: 5px;
+    background-color: #FB8122;
+    border-radius: 10px;
+    border: 1px solid #DDD;
+    margin-bottom: 5px;
+    
+}
+.experience h4{
+    line-height: 1.5;
+}
+
+.education h4 span , .experience h4 span{
+    font-weight: bold;
+    
+}
+
+.tag{
+    margin:5px;
+    border:1px solid #CCC;
+    background-color: #DDD;
+    border-radius: 10px;
+    max-width: 50px;
+    text-align: center;
+    font-size: 10px;
+    font-weight: bolder;
+    color: #000;
+}
+
+.tag{
+    padding: 10px;
+    border: 1px solid #CCC;
+    border-radius: 5px;
+    background-color: #1D2228;
+    color: #FFF;
+    display: inline-block;
+}
 

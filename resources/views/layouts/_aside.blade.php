@@ -23,6 +23,9 @@
             @if (auth()->user()->can('job_role read')) 
                 <li><a href="{{ route('jobRole.index') }}"><i class="fa fa-list-alt"></i><span>@lang('site.job_role')</span></a></li>
             @endif
+            @if (auth()->user()->can('user read')) 
+            <li><a href="{{ route('user.index') }}"><i class="fa fa-user "></i><span>@lang('site.user')</span></a></li>
+            @endif
             {{-- @if (auth()->user()->hasPermission('products_read')) --}}
                 {{-- <li><a href="{{ route('dashboard.products.index') }}"><i class="fa fa-product-hunt"></i><span>@lang('site.products')</span></a></li> --}}
             {{-- @endif --}}

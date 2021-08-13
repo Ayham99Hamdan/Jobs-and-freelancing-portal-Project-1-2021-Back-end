@@ -24,7 +24,7 @@ class QualificationController extends Controller
                 ->addColumn('nameen' , function(Qualification $model){
                     return $model->translate('en')->name;
                 })->addColumn('action', function($row){
-                    $btn = '<a class="edit btn btn-primary btn-lg"' . (auth()->user()->can("qualification update") ? (" href='"  . route('qualification.edit' , $row->id) . "'")   : "disabled") . ' ><i class="fa fa-edit"></i>'  .  __("site.edit") .'</a>';
+                    $btn = '<a class="edit btn btn-success btn-lg" style="margin:5px;"' . (auth()->user()->can("qualification update") ? (" href='"  . route('qualification.edit' , $row->id) . "'")   : "disabled") . ' ><i class="fa fa-edit"></i>'  .  __("site.edit") .'</a>';
                     $btn = $btn.'<form style="display: inline-block;" class="delete" action=" ' . route('qualification.delete' , $row->id) . ' " method="post" >
                     '. csrf_field() . '
                     '. method_field("delete") .'
@@ -32,6 +32,9 @@ class QualificationController extends Controller
 
                     return $btn;
             })
+            ->editColumn('created_at', function (Qualification $qualification) {
+                return $qualification->created_at->format('Y-m-d h:i'); // human readable format
+              })
             ->rawColumns(['action'])
             ->toJson();
         }

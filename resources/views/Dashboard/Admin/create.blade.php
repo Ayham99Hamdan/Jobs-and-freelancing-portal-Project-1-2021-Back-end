@@ -59,23 +59,34 @@
                         </div>
 
                         @php
-                            $models = ['qualification' , 'job_role'];
+                            $models = ['qualification' , 'job_role' , 'user'];
                             $maps = ['create' , 'update' , 'read' , 'delete'];
+                            $maps_user = ['read' , 'show'];
                         @endphp
 
                         <ul class="nav nav-tabs">
                             @foreach ($models as $index => $model)
                             <li class={{$index == 0 ? 'active' : ''}}> <a href="#{{$model}}" data-toggle="tab">@lang('site.' . $model)</a></li>
-                                
                             @endforeach
                         </ul>
                         <div class="tab-content">
                             @foreach ($models as $index => $model)
-                                <div class="tab-pane {{$index == 0 ? 'active' : ''}} " id="{{$model}}">
-                                    @foreach ($maps as $map)
-                                        <label><input type="checkbox" name="permissions[]" value="{{$model . ' ' . $map}}"> {{$map}}</label>
-                                    @endforeach
-                                </div>
+                                @if ($model != 'user')
+                                    <div class="tab-pane {{$index == 0 ? 'active' : ''}} " id="{{$model}}">
+                                        @foreach ($maps as $map)
+                                            <label><input type="checkbox" name="permissions[]" value="{{$model . ' ' . $map}}"> {{$map}}</label>
+                                        @endforeach
+                                    </div>
+
+                                @else 
+                                    <div class="tab-pane {{$index == 0 ? 'active' : ''}} " id="{{$model}}">
+                                        @foreach ($maps_user as $map)
+                                            <label><input type="checkbox" name="permissions[]" value="{{$model . ' ' . $map}}"> {{$map}}</label>
+                                        @endforeach
+                                    </div>
+                                @endif
+                                
+                                
                             @endforeach
               
                             

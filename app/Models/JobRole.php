@@ -15,5 +15,5 @@ class JobRole extends Model implements TranslatableContract
     protected $fillable=[
         'updated_at','created_at',
     ];
-
+    
 }

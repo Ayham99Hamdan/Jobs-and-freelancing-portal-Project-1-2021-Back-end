@@ -15,7 +15,7 @@ class User extends Authenticatable
     protected $fillable = [
         'first_name','last_name', 'email', 'password', 'phone' , 'avatar' , 'gender'
     ];
-    protected $appends = ['avatar_url'];
+    protected $appends = ['avatar_url' , 'full_name'];
 
     public function experiences(){
 
@@ -37,7 +37,7 @@ class User extends Authenticatable
 
     public function jobRole(){
 
-        return $this->hasOne(JobRole::class);
+        return $this->belongsTo(JobRole::class);
 
     }
 
@@ -60,19 +60,11 @@ class User extends Authenticatable
     }
 
     public function getGenderAttribute($value){
-
-        if ($value == 1){
-
-            return 'male';
-
-        }else if($value == 0){
-
-            return 'female';
-
-        }else {
-
-            return 'Null';
-
+        
+        if($value == 0){
+            return __('site.female');
+        } else {
+            return __('site.male');
         }
 
     }// end of get gender
@@ -95,4 +87,8 @@ class User extends Authenticatable
         return asset('uploads/user_images/' . $this->avatar);
 
     }// end of get path of user's avatar
+
+    public function getFullNameAttribute(){
+        return $this->first_name . ' ' . $this->last_name;
+    }
 }

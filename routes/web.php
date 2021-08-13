@@ -48,6 +48,9 @@ Route::group(['prefix' => LaravelLocalization::setLocale() ,
         Route::middleware('can:job_role create')->get('job-role/create' , 'JobRoleController@create')->name('jobRole.create');
         Route::middleware('can:job_role create')->post('job-role' , 'JobRoleController@store')->name('jobRole.store');
 
+        // Users Routes
+        Route::middleware('can:user read')->get('users' , 'UserController@index')->name('user.index');
+        Route::middleware('can:user show')->get('users/{user}' , 'UserController@show')->name('user.show');
 
     });
 

@@ -25,7 +25,7 @@ class AdminController extends Controller
                     return "<img src="  . $admin->avatar_path . " class='img-thumbnail' style='width:100px;'>";
                 })
                 ->addColumn('action', function($row){
-                    $btn = '<a href=" ' . route('admin.edit' , $row->id) . '" class="edit btn btn-primary btn-lg" ><i class="fa fa-edit"></i>'  .  __("site.edit") .'</a>';
+                    $btn = '<a href=" ' . route('admin.edit' , $row->id) . '" class="edit btn btn-success btn-lg" style="margin:5px;"" ><i class="fa fa-edit"></i>'  .  __("site.edit") .'</a>';
                     $btn = $btn.'<form style="display: inline-block;" class="delete" action=" ' . route('admin.delete' , $row->id) . ' " method="post" >
                     '. csrf_field() . '
                     '. method_field("delete") .'
@@ -33,6 +33,9 @@ class AdminController extends Controller
 
                     return $btn;
             })
+            ->editColumn('created_at', function (Admin $admin) {
+                return $admin->created_at->format('Y-m-d h:i'); // human readable format
+              })
             ->rawColumns(['avatar' , 'action'])
             ->toJson();
         }
