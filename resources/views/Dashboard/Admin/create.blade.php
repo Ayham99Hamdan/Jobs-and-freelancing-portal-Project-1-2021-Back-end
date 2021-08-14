@@ -59,7 +59,7 @@
                         </div>
 
                         @php
-                            $models = ['qualification' , 'job_role' , 'user'];
+                            $models = ['qualification' , 'job_role' , 'user' , 'post'];
                             $maps = ['create' , 'update' , 'read' , 'delete'];
                             $maps_user = ['read' , 'show'];
                         @endphp
@@ -71,7 +71,7 @@
                         </ul>
                         <div class="tab-content">
                             @foreach ($models as $index => $model)
-                                @if ($model != 'user')
+                                @if ($model != 'user' && $model != 'post')
                                     <div class="tab-pane {{$index == 0 ? 'active' : ''}} " id="{{$model}}">
                                         @foreach ($maps as $map)
                                             <label><input type="checkbox" name="permissions[]" value="{{$model . ' ' . $map}}"> {{$map}}</label>
@@ -88,8 +88,6 @@
                                 
                                 
                             @endforeach
-              
-                            
                         </div>
 
                         <div class="form-group">

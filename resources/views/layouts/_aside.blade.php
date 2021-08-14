@@ -12,6 +12,8 @@
           </div>
 
         <ul class="sidebar-menu" data-widget="tree">
+            <li><a href="{{ route('dashboard') }}"><i class="fa fa-dashboard"></i><span>@lang('site.dashboard')</span></a></li>
+
             @if (auth()->user()->hasRole('super-admin'))
             <li><a href="{{ route('admin.index') }}"><i class="fa fa-users"></i><span>@lang('site.admins')</span></a></li>
             @endif
@@ -24,8 +26,13 @@
                 <li><a href="{{ route('jobRole.index') }}"><i class="fa fa-list-alt"></i><span>@lang('site.job_role')</span></a></li>
             @endif
             @if (auth()->user()->can('user read')) 
-            <li><a href="{{ route('user.index') }}"><i class="fa fa-user "></i><span>@lang('site.user')</span></a></li>
+            <li><a href="{{ route('user.index') }}"><i class="fa fa-user "></i><span>@lang('site.employees')</span></a></li>
             @endif
+
+            @if (auth()->user()->can('post read'))
+            <li><a href="{{ route('post.index') }}"><i class="fa fa-search"></i><span>@lang('site.posts')</span></a></li>    
+            @endif
+            
             {{-- @if (auth()->user()->hasPermission('products_read')) --}}
                 {{-- <li><a href="{{ route('dashboard.products.index') }}"><i class="fa fa-product-hunt"></i><span>@lang('site.products')</span></a></li> --}}
             {{-- @endif --}}

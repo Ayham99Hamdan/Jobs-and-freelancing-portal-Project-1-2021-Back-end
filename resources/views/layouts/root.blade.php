@@ -3,13 +3,15 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>AdminLTE 2 | Blank Page</title>
+    <title>Job & Freelancing Dashboard
+    </title>
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
     {{--<!-- Bootstrap 3.3.7 -->--}}
     <link rel="stylesheet" href="{{ asset('dashboard_files/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('dashboard_files/css/ionicons.min.css') }}">
     <link rel="stylesheet" href="{{ asset('dashboard_files/css/skin-blue.min.css') }}">
+    <link rel = "icon" type = "image/png" href = "{{asset('uploads/logo/default.png')}}">
 
     @if (app()->getLocale() == 'ar')
         <link rel="stylesheet" href="{{ asset('dashboard_files/css/font-awesome-rtl.min.css') }}">
@@ -17,27 +19,35 @@
         <link href="https://fonts.googleapis.com/css?family=Cairo:400,700" rel="stylesheet">
         <link rel="stylesheet" href="{{ asset('dashboard_files/css/bootstrap-rtl.min.css') }}">
         <link rel="stylesheet" href="{{ asset('dashboard_files/css/rtl.css') }}">
-
         <style>
             body, h1, h2, h3, h4, h5, h6 {
-                font-family: 'Cairo', sans-serif !important;
+            font-family: 'Cairo', sans-serif !important;
+
+        }
+        .dataTables_wrapper {
+            font-size: 13px;
+            direction: rtl;
+            position: relative;
+            clear: both;
+        }
+        </style>
+    @else
+        <style>
+            body, h1, h2, h3, h4, h5, h6 {
+                font-family: sans-serif !important;
 
             }
             .dataTables_wrapper {
-                font-size: 13px;
-                direction: rtl;
-                position: relative;
-                clear: both;
-                *zoom: 1;
-                zoom: 1;
-            }
+            font-size: 13px;
+            direction: ltr;
+            position: relative;
+            clear: both;
+        }
         </style>
-    @else
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
         <link rel="stylesheet" href="{{ asset('dashboard_files/css/font-awesome.min.css') }}">
         <link rel="stylesheet" href="{{ asset('dashboard_files/css/AdminLTE.min.css') }}">
     @endif
-
     <style>
         .mr-2{
             margin-right: 5px;

@@ -9,7 +9,19 @@
             killer: true
         }).show();
     </script>
+@endif
 
+@if (session('deleted'))
+
+    <script>
+        new Noty({
+            type: 'error',
+            layout: 'topRight',
+            text: "{{ session('deleted') }}",
+            timeout: 2000,
+            killer: true
+        }).show();
+    </script>
 @endif
 
 @if (session('access_denied'))

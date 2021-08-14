@@ -7,13 +7,24 @@ return [
     'qualification' => 'Qualification',
     'company' => 'Company',
     'employees' => 'Employees',
-    'post' => 'Jobs',
+    'post'  => 'Job',
+    'posts' => 'Jobs',
+    'title' => 'Title',
+    'user_reaction_count' => 'Number Of Reaction',
+    'job_type' => 'Job Type',
+    'end_salary' => 'End Salary',
+    'start_salary' => 'Start Salary',
+    'experience_years' => 'Experience Years',
+    'description' => 'Description',
 
 
     // buttons translation
     'edit' => 'Edit',
     'add' => 'Create',
     'show' => 'Show',
+    'read' => 'Explore',
+    'approve' => 'Approve',
+    'unapprove' => 'Unapprove',
     //**************** */
 
 
@@ -56,6 +67,7 @@ return [
     // Noty sectances
     'updated_successfully' => 'Data are Updated Successfully',
     'access_deneid' => 'You not authorized to access this link',
+    'deleted_successfully' => 'Row Deleted Successfully',
 
     'table' => [
         'namear' => 'Name in Arabic',

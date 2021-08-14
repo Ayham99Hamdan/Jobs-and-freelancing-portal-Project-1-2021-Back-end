@@ -82,7 +82,7 @@ class QualificationController extends Controller
 
     public function delete(Qualification $qualification){
         $qualification->delete();
-        session()->flash('success' , __('site.deleted_successfully'));
+        session()->flash('deleted' , __('site.deleted_successfully'));
         return redirect()->route('qualification.index');
     }
 }

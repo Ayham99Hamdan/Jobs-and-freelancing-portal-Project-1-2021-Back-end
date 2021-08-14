@@ -104,7 +104,7 @@ class AdminController extends Controller
         if($admin->avatar != 'default.png')
         Storage::disk('public_uploads')->delete('/admin_images/' . $admin->avatar);
         $admin->delete();
-        session()->flash('success' , __('site.deleted_successfully'));
+        session()->flash('deleted' , __('site.deleted_successfully'));
         return redirect()->route('admin.index');
     }
 }

@@ -23,7 +23,7 @@ class UserPostsController extends apiController
     public function getMatchedPosts(Request $request){
 
         $user = auth('user')->user();
-        $posts = Post::where('job_role_id' , $user->job_role_id)->get();
+        $posts = Post::scopeApproved()->where('job_role_id' , $user->job_role_id)->get();
 
         return $this->apiResponse(PostResource::collection($posts->load('userReaction' , 'jobRoles')), self::STATUS_OK,'Posts data has been returned successfully');
 
@@ -111,7 +111,7 @@ class UserPostsController extends apiController
         array_push($ids , $post->post_id);
 
         }
-        $posts = Post::findMany($ids);
+        $posts = Post:: findMany($ids);
 
         if(count($posts) != 0)
             return $this->apiResponse(PostResource::collection($posts->load('userReaction')), self::STATUS_OK , 'posts returned successfully');

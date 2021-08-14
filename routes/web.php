@@ -52,6 +52,11 @@ Route::group(['prefix' => LaravelLocalization::setLocale() ,
         Route::middleware('can:user read')->get('users' , 'UserController@index')->name('user.index');
         Route::middleware('can:user show')->get('users/{user}' , 'UserController@show')->name('user.show');
 
+        // Posts Routes
+        Route::middleware('can:post read')->get('posts' , 'PostController@index')->name('post.index');
+        Route::middleware('can:post show')->get('posts/{post}' , 'PostController@show')->name('post.show');
+        Route::middleware('can:post show')->get('posts/approve/{post}' , 'PostController@approveToggle')->name('post.approve');
+
     });
 
     // Login Routes

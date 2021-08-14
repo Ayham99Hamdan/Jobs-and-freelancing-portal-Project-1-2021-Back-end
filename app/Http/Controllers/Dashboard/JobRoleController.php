@@ -83,7 +83,7 @@ class JobRoleController extends Controller
 
     public function delete(JobRole $jobRole){
         $jobRole->delete();
-        session()->flash('success' , __('site.deleted_successfully'));
+        session()->flash('deleted' , __('site.deleted_successfully'));
         return redirect()->route('jobRole.index');
     }
 }

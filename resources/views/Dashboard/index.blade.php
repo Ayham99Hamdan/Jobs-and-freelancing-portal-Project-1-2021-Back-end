@@ -52,14 +52,17 @@
                 <div class="col-lg-3 col-xs-6">
                     <div class="small-box bg-red">
                         <div class="inner">
-                            <h3>80</h3>
-
+                            <h3>{{$post_count}}
+                                <span class="more-data">
+                                    @lang('site.approve') : {{$post_count_approved}}
+                                    @lang('site.unapprove') : {{$post_count_unapproved}}</h3>
+                                </span>
                             <p>@lang('site.post')</p>
-                        </div>
+                        </div>  
                         <div class="icon">
                             <i class="fa fa-search"></i>
                         </div>
-                        {{-- <a href="{{ route('dashboard.clients.index') }}" class="small-box-footer">@lang('site.read') <i class="fa fa-arrow-circle-right"></i></a> --}}
+                        <a href="{{ route('post.index') }}" class="small-box-footer">@lang('site.read') <i class="fa fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
 

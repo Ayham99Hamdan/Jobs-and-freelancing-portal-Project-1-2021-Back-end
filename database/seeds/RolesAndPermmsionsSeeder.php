@@ -31,6 +31,9 @@ class RolesAndPermmsionsSeeder extends Seeder
         Permission::create(['name' => 'user read' , 'guard_name' => 'admin']);
         Permission::create(['name' => 'user show' , 'guard_name' => 'admin']);
 
+        Permission::create(['name' => 'post read' , 'guard_name' => 'admin']);
+        Permission::create(['name' => 'post show' , 'guard_name' => 'admin']);
+
         // Create Roles
         Role::create(['name' => 'super-admin' , 'guard_name' => 'admin'])
             ->givePermissionTo(Permission::all());

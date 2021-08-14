@@ -70,7 +70,7 @@ class User extends Authenticatable
     }// end of get gender
     public function setGenderAttribute($value){
 
-        if($value === "male"){
+        if($value === "male" || $value === 1){
 
             $this->attributes['gender'] = 1;
 

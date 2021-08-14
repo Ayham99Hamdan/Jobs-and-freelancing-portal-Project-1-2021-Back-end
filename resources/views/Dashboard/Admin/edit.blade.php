@@ -49,8 +49,9 @@
                         </div>
 
                         @php
-                            $models = ['qualification' , 'job_role'];
+                            $models = ['qualification' , 'job_role' , 'user' , 'post'];
                             $maps = ['create' , 'update' , 'read' , 'delete'];
+                            $maps_user = ['read' , 'show'];
                         @endphp
 
                         <ul class="nav nav-tabs">
@@ -61,13 +62,20 @@
                         </ul>
                         <div class="tab-content">
                             @foreach ($models as $index => $model)
-                                <div class="tab-pane {{$index == 0 ? 'active' : ''}} " id="{{$model}}">
-                                    @foreach ($maps as $map)
-                                        <label><input type="checkbox" name="permissions[]" value="{{$model . ' ' . $map}}" @if ($admin->hasPermissionTo($model . ' ' . $map))
-                                          checked  
-                                        @endif> {{$map}}</label>
-                                    @endforeach
-                                </div>
+                                @if ($model != 'user' && $model != 'post')
+                                    <div class="tab-pane {{$index == 0 ? 'active' : ''}} " id="{{$model}}">
+                                        @foreach ($maps as $map)
+                                            <label><input type="checkbox" name="permissions[]" value="{{$model . ' ' . $map}}"> {{$map}}</label>
+                                        @endforeach
+                                    </div>
+
+                                @else 
+                                    <div class="tab-pane {{$index == 0 ? 'active' : ''}} " id="{{$model}}">
+                                        @foreach ($maps_user as $map)
+                                            <label><input type="checkbox" name="permissions[]" value="{{$model . ' ' . $map}}"> {{$map}}</label>
+                                        @endforeach
+                                    </div>
+                                @endif
                             @endforeach
                         </div>
 

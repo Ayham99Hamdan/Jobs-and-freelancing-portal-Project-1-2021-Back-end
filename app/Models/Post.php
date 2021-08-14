@@ -14,7 +14,9 @@ class Post extends Model
     'job_type',
     'start_salary',
     'experience_years',
-    'description'];
+    'description',
+    'is_approved'
+];
     public function userReaction(){
 
         return $this->belongsToMany(user::class, 'reactions');
@@ -48,5 +50,9 @@ class Post extends Model
 
         return $this->hasMany(PostTag::class , 'post_id');
 
+    }
+
+    public function scopeApproved($query){
+        return $query->where('is_approved' , 1);
     }
 }
