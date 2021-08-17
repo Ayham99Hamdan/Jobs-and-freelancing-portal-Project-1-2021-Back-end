@@ -18,7 +18,7 @@ class CreateCompaniesTable extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->text('password');
-            $table->string('avatar')->nullable();
+            $table->string('avatar')->default('default.png');
             $table->bigInteger('job_role_id')->unsigned()->nullable();
             $table->text('description')->nullable();
             $table->timestamps();

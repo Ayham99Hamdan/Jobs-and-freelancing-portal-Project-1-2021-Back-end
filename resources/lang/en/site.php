@@ -5,7 +5,7 @@ return [
     'user' => 'User',
     'dashboard' => 'Dashboard',
     'qualification' => 'Qualification',
-    'company' => 'Company',
+    'companies' => 'Companies',
     'employees' => 'Employees',
     'post'  => 'Job',
     'posts' => 'Jobs',

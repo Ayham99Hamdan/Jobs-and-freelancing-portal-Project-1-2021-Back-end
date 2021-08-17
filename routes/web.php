@@ -57,6 +57,9 @@ Route::group(['prefix' => LaravelLocalization::setLocale() ,
         Route::middleware('can:post show')->get('posts/{post}' , 'PostController@show')->name('post.show');
         Route::middleware('can:post show')->get('posts/approve/{post}' , 'PostController@approveToggle')->name('post.approve');
 
+        // Company Routes
+        Route::middleware('can:company read')->get('company' , 'CompanyController@index')->name('company.index');
+
     });
 
     // Login Routes

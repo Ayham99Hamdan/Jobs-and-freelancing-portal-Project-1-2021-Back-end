@@ -74,7 +74,7 @@ return [
 
     'permissions' => 'الصلاحيات',
 
-    'company' => 'الشركات',
+    'companies' => 'الشركات',
     'all_categories' => 'كل الاقسام',
     'name' => 'الاسم',
     'description' => 'الوصف',

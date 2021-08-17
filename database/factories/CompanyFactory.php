@@ -10,7 +10,6 @@ $factory->define(\App\Models\Company::class, function (Faker $faker) {
         'name' => $faker->name,
         'email' => $faker->unique()->safeEmail,
         'password' => bcrypt('123456'),
-        'avatar' => $faker->imageUrl(),
         'job_role_id' => $faker->numberBetween(1,10),
         'description' => $faker->text,
     ];

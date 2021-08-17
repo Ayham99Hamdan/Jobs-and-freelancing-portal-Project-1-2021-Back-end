@@ -16,9 +16,10 @@ class Company extends Authenticatable
         'name', 'email', 'password', 'avatar' , 'description', 'job_role_id'
     ];
 
-    public function job_role(){
+    protected $appends = ['avatar_path'];
+    public function jobRole(){
 
-        return $this->hasOne(JopRole::class);
+        return $this->belongsTo(JobRole::class , 'job_role_id');
 
     }
 
@@ -28,4 +29,7 @@ class Company extends Authenticatable
 
     }
     
+    public function getAvatarPathAttribute(){
+        return asset('uploads/company_images/' . $this->avatar);
+    }
 }

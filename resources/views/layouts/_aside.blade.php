@@ -33,6 +33,10 @@
             <li><a href="{{ route('post.index') }}"><i class="fa fa-search"></i><span>@lang('site.posts')</span></a></li>    
             @endif
             
+            @if (auth()->user()->can('company read'))
+            <li><a href="{{ route('company.index') }}"><i class="fa fa-building"></i><span>@lang('site.companies')</span></a></li>    
+            @endif
+
             {{-- @if (auth()->user()->hasPermission('products_read')) --}}
                 {{-- <li><a href="{{ route('dashboard.products.index') }}"><i class="fa fa-product-hunt"></i><span>@lang('site.products')</span></a></li> --}}
             {{-- @endif --}}
