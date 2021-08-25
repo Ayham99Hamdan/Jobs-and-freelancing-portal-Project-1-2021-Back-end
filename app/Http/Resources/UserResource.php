@@ -19,7 +19,7 @@ class UserResource extends JsonResource
             'id' => $this->id,
             'name' => $this->first_name . " " . $this->last_name,
             'email' => $this->email,
-            'avatar' => $this->avatar,
+            'avatar' => $this->avatar_url,
             'educations' => EducationResource::collection($this->whenLoaded('educations')),
             'experiences' => ExperienceResource::collection($this->whenLoaded('experiences'))
 

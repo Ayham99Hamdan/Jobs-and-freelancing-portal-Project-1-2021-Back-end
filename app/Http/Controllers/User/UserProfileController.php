@@ -14,8 +14,10 @@ use App\Models\Experience;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\App;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Storage;
+use PDF;
 
 class UserProfileController extends apiController
 {
@@ -122,4 +124,6 @@ class UserProfileController extends apiController
             }
         return $this->apiResponse(new UserResource($user), self::STATUS_OK, 'User Data has been updataed successfully');
     }// end of update main user data
+
+    
 }

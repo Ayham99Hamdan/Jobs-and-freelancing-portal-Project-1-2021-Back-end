@@ -19,6 +19,19 @@ class getUserProfileController extends apiController
         return $this->apiResponse(new UserResource($user) , self::STATUS_OK, 'User Information');
 
     }
+    public function getCV(){
+        $user_id = auth('user')->user()->id;
+        $user = User::find($user_id);
+        $user->load('educations' , 'experiences');
+        $pdf = PDF::loadView('CV_template.CV');
+        return $pdf->stream();
+
+    }
+
+    public function getuserProfileById($id){
+        $user = new UserResource(User::findOrFail($id)->load(['educations' , 'experiences']));
+        return $this->apiResponse(new UserResource($user) , self::STATUS_OK, 'User Information');
+    }
 
 
 }

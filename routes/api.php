@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Company\CompanyManageController;
 use App\Http\Controllers\Company\Post\ScheduleController;
+use App\Http\Controllers\User\getUserProfileController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -61,7 +62,8 @@ Route::namespace('User')->prefix('user')->middleware(['auth:user' , 'locale'])->
     Route::post('updateExperience/{id}' , 'UserProfileController@updateExperience');
     // get user informations Routes
     Route::get('userProfile' , 'getUserProfileController@getUserProfile');
-
+    // get user profile as CV
+    Route::get('userCV' , 'UserProfileController@getCV');
     // get and control matched posts
     //Route::get('getPosts' , 'UserPostsController@getMatchedPosts');
     Route::get('getPosts' , 'UserPostsController@getPostByTag');
@@ -80,4 +82,5 @@ Route::namespace('Company')->prefix('company')->middleware(['auth:company' , 'lo
     Route::apiResource('schedule' , \Post\ScheduleController::class);
     Route::post('approve' , [CompanyManageController::class, 'approve']);
     Route::get('schedule/index/{post_id}' , [\App\Http\Controllers\Company\Post\ScheduleController::class , 'index']);
+    Route::get('userprofile/{id}' , [getUserProfileController::class , 'getuserProfileById']);
 });
