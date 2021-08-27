@@ -29,7 +29,6 @@ class UserController extends apiController
         if($validate instanceof Response) return $validate;
         $request_data = $request->except('password', 'password_confirmation', 'avatar');
         $request_data['password'] = bcrypt($request->password);
-
         if ($request->avatar) {
 
             Image::make($request->avatar)->resize(300, 300, function ($constraint) {

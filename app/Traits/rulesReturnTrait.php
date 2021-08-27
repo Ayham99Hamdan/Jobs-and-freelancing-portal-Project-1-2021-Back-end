@@ -18,7 +18,8 @@ trait rulesReturnTrait
             'email' => 'required|string|unique:users,email',
             'password' => 'required|string|confirmed',
             'avatar' => 'image',
-            'tags.*' => 'string'
+            'tags.*' => 'string',
+            'job_role_id' => 'exists:job_roles,id'
 
         ];
     }

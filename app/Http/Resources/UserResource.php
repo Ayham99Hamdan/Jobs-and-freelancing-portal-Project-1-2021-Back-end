@@ -22,7 +22,6 @@ class UserResource extends JsonResource
             'avatar' => $this->avatar_url,
             'educations' => EducationResource::collection($this->whenLoaded('educations')),
             'experiences' => ExperienceResource::collection($this->whenLoaded('experiences'))
-
         ];
     }
 }

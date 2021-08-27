@@ -63,7 +63,7 @@ Route::namespace('User')->prefix('user')->middleware(['auth:user' , 'locale'])->
     // get user informations Routes
     Route::get('userProfile' , 'getUserProfileController@getUserProfile');
     // get user profile as CV
-    Route::get('userCV' , 'UserProfileController@getCV');
+    Route::get('userCV' , 'getUserProfileController@getCV');
     // get and control matched posts
     //Route::get('getPosts' , 'UserPostsController@getMatchedPosts');
     Route::get('getPosts' , 'UserPostsController@getPostByTag');

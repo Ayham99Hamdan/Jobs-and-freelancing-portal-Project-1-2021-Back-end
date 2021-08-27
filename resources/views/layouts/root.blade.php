@@ -21,7 +21,7 @@
         <link rel="stylesheet" href="{{ asset('dashboard_files/css/rtl.css') }}">
         <style>
             body, h1, h2, h3, h4, h5, h6 {
-            font-family: 'Cairo', sans-serif !important;
+            font-family: 'Cairo', sans-serif !important;    
 
         }
         .dataTables_wrapper {
@@ -112,47 +112,14 @@
 <div class="wrapper">
     <header class="main-header">
 
-        {{--<!-- Logo -->--}}
-        {{-- <a href="{{ asset('dashboard') }}/index2.html" class="logo"> --}}
-            {{--<!-- mini logo for sidebar mini 50x50 pixels -->--}}
-            <span class="logo-mini"><b>A</b>LT</span>
-            <span class="logo-lg"><b>Admin</b>LTE</span>
-        {{-- </a> --}}
+
 
         <nav class="navbar navbar-static-top">
-            <!-- Sidebar toggle button-->
-            {{-- <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </a> --}}
-
             <div class="navbar-custom-menu">
                 <ul class="nav navbar-nav ml-auto">
-
-                    <!-- Messages: style can be found in dropdown.less-->
-                    <li class="nav-item dropdown">
-                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                            {{ Auth::user()->name }}
-                        </a>
-
-                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="{{ route('logout') }}"
-                               onclick="event.preventDefault();
-                                             document.getElementById('logout-form').submit();">
-                                {{ __('Logout') }}
-                            </a>
-
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                @csrf
-                            </form>
+                    <li class="nav-item dropdown">  
                         </div>
-                    </li>
-
-                        
-                    
-                    
+                    </li>     
                 </ul>
             </div>
         </nav>
@@ -209,9 +176,9 @@
 
 <script>
     $(document).ready(function () {
-
+        
         $('.sidebar-menu').tree();
-
+    
         //icheck
         $('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
             checkboxClass: 'icheckbox_minimal-blue',

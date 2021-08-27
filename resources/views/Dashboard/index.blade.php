@@ -92,10 +92,12 @@
             <div class="box box-solid">
 
                 <div class="box-header">
-                    <h3 class="box-title">Sales Graph</h3>
+                    <h3 class="box-title">
+                        
+                    </h3>
                 </div>
                 <div class="box-body border-radius-none">
-                    <div class="chart" id="line-chart" style="height: 250px;"></div>
+                    <div id="post-chart" style="height: 250px;"></div>
                 </div>
                 <!-- /.box-body -->
             </div>
@@ -106,3 +108,24 @@
 
 
 @endsection
+
+@push('scripts')
+    <script>
+        var line = new Morris.Line({
+            element: 'post-chart',
+            data: [
+                    @foreach ($post_chart as $value)
+                        { ym: "{{ $value->year }}-{{ $value->month }}", value: {{$value->count}} },
+                    @endforeach
+                ],
+                xkey: 'ym',
+                ykeys: ['value'],
+                labels: ['Value'],
+                lineWidth: 2,
+                hideHover: 'auto',
+                gridStrokWidth: 0.4,
+                pointSize: 4
+                
+        });
+    </script>
+@endpush

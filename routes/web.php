@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\Dashboard\QualificationController;
 use App\Models\Qualification;
+use Illuminate\Contracts\Session\Session;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -65,5 +67,9 @@ Route::group(['prefix' => LaravelLocalization::setLocale() ,
     // Login Routes
     Auth::routes(['register' => false]);
     Route::get('/home', 'HomeController@index')->name('home');
+    // Route::get('setLanguage/{lang}' , function($lang){
+        
+    //     return redirect()->back();
+    // })->name('set-language');
 });
 

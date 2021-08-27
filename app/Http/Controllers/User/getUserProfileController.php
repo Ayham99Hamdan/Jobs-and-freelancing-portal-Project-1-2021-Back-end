@@ -8,6 +8,7 @@ use App\Http\Resources\UserResource;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Traits\responseTrait;
+use PDF;
 
 class getUserProfileController extends apiController
 {
@@ -22,8 +23,10 @@ class getUserProfileController extends apiController
     public function getCV(){
         $user_id = auth('user')->user()->id;
         $user = User::find($user_id);
-        $user->load('educations' , 'experiences');
-        $pdf = PDF::loadView('CV_template.CV');
+        $user->load('educations' , 'experiences' , 'jobRole');
+        $user = $user->toArray();
+        //dd($user);
+        $pdf = PDF::loadView('CV_template.CV' , $user);
         return $pdf->stream();
 
     }

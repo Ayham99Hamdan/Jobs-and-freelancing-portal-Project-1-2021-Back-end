@@ -39,6 +39,7 @@ return [
     'password' => 'Password',
     'password_confirmation' => 'Confirm your password',
     'login' => 'Login',
+    'logout' => 'Logout',
     'remember_me' => 'Remember me',
     'first_name' => 'First Name',
     'last_name' => 'Last Name',

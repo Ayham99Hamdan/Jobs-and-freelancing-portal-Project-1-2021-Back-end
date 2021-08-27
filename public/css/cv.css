@@ -1,0 +1,70 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    background-color: #CCC;
+}
+
+.primary-data{
+    background-color: #587065;
+    height: 200px;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.primary-data .full-name{
+    position: absolute;
+    float: left;
+    padding: 30px;
+}
+
+.primary-data .full-name h1{
+    color: #FFF;
+}
+
+.primary-data .full-name h4{
+    color: #1f3821;
+    padding-top: 10px;
+}
+
+.primary-data .avatar {
+    width: 50%;
+    height: inherit;
+    float: right;
+}
+
+.primary-data .avatar img{
+    border-radius: 50%;
+    width: 40%;
+    height: 75%;
+    margin-top: 20px;
+    border: 2px solid #000;
+    margin-left: 150px;
+}
+
+.information{
+    color: #FFF;
+    position: relative;
+    background-color: #26332d;
+    height: 40px;
+    width: 100%;   
+    overflow: hidden;
+}
+
+.information .phone, .information .email{
+    position: absolute;
+    width: 200px;
+    height: 100%;
+    font-size: 20px;
+    border: 2px solid #FFF;
+    right: 0px;
+    text-align: left;
+}
+
+.information .email{
+    left: 0px;
+}
+
